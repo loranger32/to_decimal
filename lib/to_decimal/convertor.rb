@@ -1,10 +1,10 @@
 class Convertor
-  attr_reader :input_number, :decimal_integer, :base_format
+  attr_reader :input, :decimal, :base
 
-  def initialize(input_number=0, base=10)
-    @input_number    = format(input_number)
-    @base_format     = validate(base)
-    @decimal_integer = 0
+  def initialize(input=0, base=10)
+    @input    = format(input)
+    @base     = validate(base)
+    @decimal  = 0
   end
 
   def self.to_d(digit, base)
@@ -12,19 +12,19 @@ class Convertor
   end
 
   def input=(integer)
-    @input_number = format(integer)
+    @input = format(integer)
   end
 
   def base=(integer)
-    @base_format = validate(integer)
+    @base = validate(integer)
   end
 
   def to_d
     reset
     digitize.each_with_index do |digit, power|
-      @decimal_integer += digit * (base_format**power)
+      @decimal += digit * (base**power)
     end
-    decimal_integer
+    decimal
   end
 
   def to_d_with(input, base)
@@ -35,19 +35,19 @@ class Convertor
   end
 
   def reset
-    @decimal_integer = 0
+    @decimal = 0
   end
 
   alias_method :to_decimal, :to_d
 
   private
 
-  def format(input_number)
-    if input_number.is_a?(String) || input_number.is_a?(Integer)
-      if input_number.is_a?(String)
-        input_number.to_i
+  def format(input)
+    if input.is_a?(String) || input.is_a?(Integer)
+      if input.is_a?(String)
+        input.to_i
       else
-        input_number
+        input
       end
     else
       raise ArgumentError, "Input number must be Integer or String \
@@ -62,7 +62,7 @@ representation of an Integer"
   end
 
   def digitize
-    input_number.digits
+    input.digits
   end
 end
 
