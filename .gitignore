@@ -94,3 +94,6 @@ Temporary Items
 
 # SimpleCoverage
 coverage
+
+# Rubocop
+.rubocop.yml
