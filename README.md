@@ -28,18 +28,18 @@ This project is tested under minitest.
 Instantiate a new `Convertor` object :
 
 ```ruby
-convertor = Convertor.new
+convertor = ToDecimal::Convertor.new
 # => a new object with default input number set to 0 and default base 
 # set to 10
 
 # or
-convertor = Convertor.new(125)
+convertor = ToDecimal::Convertor.new(125)
 # or
-convertor = Convertor.new('125')
+convertor = ToDecimal::Convertor.new('125')
 # => a new object with input number set to 125 and default base set to 10
 
 # or
-convertor = Convertor.new(125, 8)
+convertor = ToDecimal::Convertor.new(125, 8)
 # => a new object with input number set to 125 and base set to 8
 ```
 
@@ -81,7 +81,7 @@ Instead of creating a new object, you can also call a class method `#to_d` on
 the Convertor class itself :
 
 ```ruby
-Convertor.to_d(1231, 4)
+ToDecimal::Convertor.to_d(1231, 4)
 # => 109
 ```
 

@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'minitest/reporters'
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
-require_relative '../lib/gutils'
+require_relative '../lib/to_decimal'
 
 class GutilsConversionTest < Minitest::Test
   # ======== Setup =============================================================
