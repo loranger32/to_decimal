@@ -11,6 +11,6 @@ Gem::Specification.new do |s|
   s.email       = 'laurentguinotte@icloud.com'
   s.files       = ["lib/to_decimal.rb"]
   s.homepage    =
-    'https://github.com/loranger32/'
+    'https://github.com/loranger32/to_decimal'
   s.license     = 'MIT'
 end
