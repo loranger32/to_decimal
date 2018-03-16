@@ -4,6 +4,32 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 require_relative '../lib/to_decimal'
 
+# ========== Data for the tests ================================================
+
+TEST_VALUES_BASE_2 = [[101, 2, 5], [100_000_000, 2, 256]]
+TEST_VALUES_BASE_3 = [[1122111, 3, 1201], [12, 3, 5]]
+TEST_VALUES_BASE_4 = [[11001, 4, 321], [322, 4, 58]]
+TEST_VALUES_BASE_5 = [[14, 5, 9], [10011302, 5, 78952]]
+TEST_VALUES_BASE_6 = [[13, 6, 9], [1405304, 6, 78952]]
+TEST_VALUES_BASE_7 = [[12, 7, 9], [446116, 7, 78952]]
+TEST_VALUES_BASE_8 = [[11, 8, 9], [232150, 8, 78952]]
+TEST_VALUES_BASE_9 = [[10, 9, 9], [130264, 9, 78952]]
+TEST_VALUES_BASE_10 = [[9, 10, 9], [78952, 10, 78952]]
+
+# ========== Test helper methods ===============================================
+
+def populate_convertor(data_set)
+  @convertor.input = data_set[0]
+  @convertor.base = data_set[1]
+end
+
+def execute_test_with_values(test_values)
+  test_values.each do |data_set|
+    populate_convertor(data_set)
+    assert_equal data_set[2], @convertor.to_d 
+  end
+end
+
 class ToDecimalConvertorTest < Minitest::Test
   # ======== Setup =============================================================
   def setup
@@ -66,7 +92,7 @@ class ToDecimalConvertorTest < Minitest::Test
     assert_raises(ArgumentError) { @convertor.input = [4] }
   end
 
-  def test_raises_an_error_if_base_arg_is_not_an_integer
+  def test_raises_an_error_if_base_arg_is_not_an_integer_or_a_string
     assert_raises(ArgumentError) { @convertor.base = [3] }
     assert_raises(ArgumentError) { @convertor.base = :sym }
   end
@@ -81,25 +107,40 @@ class ToDecimalConvertorTest < Minitest::Test
   end
 
   # ========= Testing return values of to_d instance method ====================
-
   def test_to_d_returns_decimal_value_of_number_of_base_2
-    @convertor.base = 2
-    @convertor.input = 101
-    assert_equal(5, @convertor.to_d)
-    @convertor.input = 100000000
-    assert_equal(256, @convertor.to_d)
-    @convertor.input = "101111010"
-    assert_equal(378, @convertor.to_d)
+    execute_test_with_values(TEST_VALUES_BASE_2)
   end
 
   def test_to_d_returns_decimal_value_of_number_of_base_3
-    @convertor.base = 3
-    @convertor.input = 1012
-    assert_equal(32, @convertor.to_d)
-    @convertor.input = "12111011"
-    assert_equal(4000, @convertor.to_d)
-    @convertor.input = "101"
-    assert_equal(10, @convertor.to_d)
+    execute_test_with_values(TEST_VALUES_BASE_3)
+  end
+
+  def test_to_d_returns_decimal_value_of_number_of_base_4
+    execute_test_with_values(TEST_VALUES_BASE_4)
+  end
+
+  def test_to_d_returns_decimal_value_of_number_of_base_5
+    execute_test_with_values(TEST_VALUES_BASE_5)
+  end
+
+  def test_to_d_returns_decimal_value_of_number_of_base_6
+    execute_test_with_values(TEST_VALUES_BASE_6)
+  end
+
+  def test_to_d_returns_decimal_value_of_number_of_base_7
+    execute_test_with_values(TEST_VALUES_BASE_7)
+  end
+
+  def test_to_d_returns_decimal_value_of_number_of_base_8
+    execute_test_with_values(TEST_VALUES_BASE_8)
+  end
+
+  def test_to_d_returns_decimal_value_of_number_of_base_9
+    execute_test_with_values(TEST_VALUES_BASE_9)
+  end
+
+  def test_to_d_returns_decimal_value_of_number_of_base_10
+    execute_test_with_values(TEST_VALUES_BASE_10)
   end
 
   # ========= Testing aliased to_decimal instance method =======================
@@ -107,6 +148,37 @@ class ToDecimalConvertorTest < Minitest::Test
   def test_to_decimal_is_alias_for_to_d
     convertor = ToDecimal::Convertor.new(200, 10)
     assert_equal(200, convertor.to_decimal)
+  end
+
+  # ========== Testing to_d_with instance method ===============================
+
+  def test_to_d_with_returns_the_decimal_version_of_a_number_of_base_8
+    assert_equal(4, @convertor.to_d_with(4, 8))
+    assert_equal(14, @convertor.to_d_with(16, 8))
+  end
+
+  def test_to_d_with_returns_the_decimal_version_of_a_number_of_base_3
+    assert_equal(2, @convertor.to_d_with(2, 3))
+    assert_equal(80, @convertor.to_d_with(2222, 3))
+  end
+
+  def test_to_d_with_raises_error_if_first_arg_is_not_string_or_integer
+    assert_raises(ArgumentError) { @convertor.to_d_with(:sym, 5) }
+    assert_raises(ArgumentError) { @convertor.to_d_with([4], 5) }
+  end
+
+  def test_to_d_with_raises_an_error_if_base_arg_is_not_an_integer_or_a_string
+    assert_raises(ArgumentError) { @convertor.to_d_with('222', [5]) }
+    assert_raises(ArgumentError) { @convertor.to_d_with(45, :sym) }
+  end
+
+  def test_to_d_with_raises_an_error_if_base_arg_is_greater_than_10
+    assert_raises(ArgumentError) { @convertor.to_d_with(456, 12) }
+  end
+
+  def test_to_d_with_raises_an_error_if_base_arg_is_smaller_than_1
+    assert_raises(ArgumentError) { @convertor.to_d_with(456, 0) }
+    assert_raises(ArgumentError) { @convertor.to_d_with(456, -8) }
   end
 
   # ========= Testing to_d class method ========================================
@@ -150,36 +222,5 @@ class ToDecimalConvertorTest < Minitest::Test
   def test_to_d_class_method_raises_an_error_if_base_arg_is_smaller_than_1
     assert_raises(ArgumentError) { ToDecimal::Convertor.to_d(456, 0) }
     assert_raises(ArgumentError) { ToDecimal::Convertor.to_d(456, -8) }
-  end
-
-  # ========== Testing to_d_with instance method ===============================
-
-  def test_to_d_with_returns_the_decimal_version_of_a_number_of_base_8
-    assert_equal(4, @convertor.to_d_with(4, 8))
-    assert_equal(14, @convertor.to_d_with(16, 8))
-  end
-
-  def test_to_d_with_returns_the_decimal_version_of_a_number_of_base_3
-    assert_equal(2, @convertor.to_d_with(2, 3))
-    assert_equal(80, @convertor.to_d_with(2222, 3))
-  end
-
-  def test_to_d_with_raises_error_if_first_arg_is_not_string_or_integer
-    assert_raises(ArgumentError) { @convertor.to_d_with(:sym, 5) }
-    assert_raises(ArgumentError) { @convertor.to_d_with([4], 5) }
-  end
-
-  def test_to_d_with_raises_an_error_if_base_arg_is_not_an_integer_or_a_string
-    assert_raises(ArgumentError) { @convertor.to_d_with('222', [5]) }
-    assert_raises(ArgumentError) { @convertor.to_d_with(45, :sym) }
-  end
-
-  def test_to_d_with_raises_an_error_if_base_arg_is_greater_than_10
-    assert_raises(ArgumentError) { @convertor.to_d_with(456, 12) }
-  end
-
-  def test_to_d_with_raises_an_error_if_base_arg_is_smaller_than_1
-    assert_raises(ArgumentError) { @convertor.to_d_with(456, 0) }
-    assert_raises(ArgumentError) { @convertor.to_d_with(456, -8) }
   end
 end
