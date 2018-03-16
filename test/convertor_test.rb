@@ -4,7 +4,7 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 require_relative '../lib/to_decimal'
 
-class ToDecimalConversionTest < Minitest::Test
+class ToDecimalConvertorTest < Minitest::Test
   # ======== Setup =============================================================
   def setup
     @convertor = ToDecimal::Convertor.new
@@ -13,33 +13,38 @@ class ToDecimalConversionTest < Minitest::Test
   # ======== Testing initialization process ====================================
 
   def test_initialization_without_argument_has_default_input_and_base
-    assert_equal(0, @convertor.input)
-    assert_equal(10, @convertor.base)
+    assert_equal 0, @convertor.input
+    assert_equal 10, @convertor.base
   end
 
   def test_initialization_with_arguments_has_input_and_base
     @new_convertor = ToDecimal::Convertor.new(202, 8)
-    assert_equal(202, @new_convertor.input)
-    assert_equal(8, @new_convertor.base)
+    assert_equal 202, @new_convertor.input
+    assert_equal 8, @new_convertor.base
   end
 
   def test_initialization_accepts_also_string_as_input
     @new_convertor = ToDecimal::Convertor.new('3098')
-    assert_equal(3098, @new_convertor.input)
+    assert_equal 3098, @new_convertor.input
+  end
+
+  def test_initialization_accepts_also_string_as_base
+    @new_convertor = ToDecimal::Convertor.new('1231', '4')
+    assert_equal 4, @new_convertor.base
   end
 
   # ======== Testing accessing and modifying attributes ========================
 
   def test_input_can_be_updated
     @convertor.input = 10
-    assert_equal(10, @convertor.input)
+    assert_equal 10, @convertor.input
     @convertor.input = 20
-    assert_equal(20, @convertor.input)
+    assert_equal 20, @convertor.input
   end
 
   def test_input_can_also_be_updated_with_a_string
     @convertor.input = '202'
-    assert_equal(202, @convertor.input)
+    assert_equal 202, @convertor.input
   end
 
   def test_base_can_be_updated
@@ -47,6 +52,11 @@ class ToDecimalConversionTest < Minitest::Test
     assert_equal(2, @convertor.base)
     @convertor.base = 8
     assert_equal(8, @convertor.base)
+  end
+
+  def test_base_can_also_be_updated_with_a_string
+    @convertor.base = '4'
+    assert_equal 4, @convertor.base
   end
 
   # ========= Testing ArgumentError is raised with invalid arguments ===========
@@ -57,7 +67,7 @@ class ToDecimalConversionTest < Minitest::Test
   end
 
   def test_raises_an_error_if_base_arg_is_not_an_integer
-    assert_raises(ArgumentError) { @convertor.base = "3" }
+    assert_raises(ArgumentError) { @convertor.base = [3] }
     assert_raises(ArgumentError) { @convertor.base = :sym }
   end
 
@@ -129,7 +139,7 @@ class ToDecimalConversionTest < Minitest::Test
   end
 
   def test_to_d_class_method_raises_an_error_if_base_arg_is_not_an_integer
-    assert_raises(ArgumentError) { ToDecimal::Convertor.to_d('222', '5') }
+    assert_raises(ArgumentError) { ToDecimal::Convertor.to_d('222', [5]) }
     assert_raises(ArgumentError) { ToDecimal::Convertor.to_d(45, :sym) }
   end
 
@@ -159,8 +169,8 @@ class ToDecimalConversionTest < Minitest::Test
     assert_raises(ArgumentError) { @convertor.to_d_with([4], 5) }
   end
 
-  def test_to_d_with_raises_an_error_if_base_arg_is_not_an_integer
-    assert_raises(ArgumentError) { @convertor.to_d_with('222', '5') }
+  def test_to_d_with_raises_an_error_if_base_arg_is_not_an_integer_or_a_string
+    assert_raises(ArgumentError) { @convertor.to_d_with('222', [5]) }
     assert_raises(ArgumentError) { @convertor.to_d_with(45, :sym) }
   end
 

@@ -4,19 +4,19 @@ module ToDecimal
 
     def initialize(input=0, base=10)
       @input    = format(input)
-      @base     = validate(base)
+      @base     = format_and_validate(base)
     end
 
     def self.to_d(digit, base)
       new(digit, base).to_d
     end
 
-    def input=(integer)
-      @input = format(integer)
+    def input=(new_input)
+      @input = format(new_input)
     end
 
-    def base=(integer)
-      @base = validate(integer)
+    def base=(new_base)
+      @base = format_and_validate(new_base)
     end
 
     def to_d
@@ -27,9 +27,9 @@ module ToDecimal
       decimal
     end
 
-    def to_d_with(input, base)
-      self.input = format(input)
-      self.base  = validate(base)
+    def to_d_with(new_input, new_base)
+      self.input = format(new_input)
+      self.base  = format_and_validate(new_base)
       to_d
     end
 
@@ -45,15 +45,20 @@ module ToDecimal
           input
         end
       else
-        raise ArgumentError, "Input number must be Integer or String \
-  representation of an Integer"
+        raise ArgumentError, "Integer or String representation of an Integer\
+ expected as input or base"
       end
     end
 
-    def validate(base)
+    def validate_base(base)
       raise ArgumentError, "Base must be an Integer" unless base.is_a?(Integer)
       raise ArgumentError, "Base must be 1..10" unless base > 0 && base <= 10
-      base
+    end
+
+    def format_and_validate(base)
+      formatted_base = format(base)
+      validate_base(formatted_base)
+      formatted_base
     end
 
     def digitize
