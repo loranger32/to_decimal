@@ -1,6 +1,6 @@
 # to_decimal
 
-Provide a simple way to convert an integer expressed in bases
+A simple gem to convert an integer expressed in bases
 2 up to 10 to a decimal integer.
 
 I've looked for a simple way to get a decimal integer from an integer expressed
