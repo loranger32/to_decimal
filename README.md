@@ -3,7 +3,7 @@
 Provide a simple way to convert an integer expressed in bases
 2 up to 10 to a decimal integer.
 
-I've looked for a simple way to get a decimal integer form an integer expressed
+I've looked for a simple way to get a decimal integer from an integer expressed
 in another base lesser or equal to ten, but I didn't found one, so I decided to
 create my own little gem for that. If it already exists, just let me know.
 
@@ -46,9 +46,9 @@ convertor = Convertor.new(125, 8)
 Both input number and base attributes can be updated simply :
 
 ```ruby
-convertor.input_number = 120
+convertor.input = 120
 #or
-convertor.input_number = '120'
+convertor.input = '120'
 
 convertor.base = 3
 ```
@@ -87,7 +87,7 @@ Convertor.to_d(1231, 4)
 
 # Contribute
 
-Contributions are welcome !
+If you think this (very) small gem could be improved, don't hesitate.
 
 - Fork it ;
 - Create your own branch (`git checkout -b my-new-feature`) ;
