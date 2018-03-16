@@ -49,11 +49,6 @@ class ToDecimalConversionTest < Minitest::Test
     assert_equal(8, @convertor.base)
   end
 
-  def test_reset_set_decimal_to_zero
-    @convertor.reset
-    assert_equal(0, @convertor.decimal)
-  end
-
   # ========= Testing ArgumentError is raised with invalid arguments ===========
 
   def test_raises_an_error_if_input_is_not_string_or_integer
@@ -176,11 +171,5 @@ class ToDecimalConversionTest < Minitest::Test
   def test_to_d_with_raises_an_error_if_base_arg_is_smaller_than_1
     assert_raises(ArgumentError) { @convertor.to_d_with(456, 0) }
     assert_raises(ArgumentError) { @convertor.to_d_with(456, -8) }
-  end
-
-  # ============ Teardown ======================================================
-
-  def teardown
-    @convertor.reset
   end
 end

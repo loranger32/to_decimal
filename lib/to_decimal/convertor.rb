@@ -1,11 +1,10 @@
 module ToDecimal
   class Convertor
-    attr_reader :input, :decimal, :base
+    attr_reader :input, :base
 
     def initialize(input=0, base=10)
       @input    = format(input)
       @base     = validate(base)
-      @decimal  = 0
     end
 
     def self.to_d(digit, base)
@@ -21,9 +20,9 @@ module ToDecimal
     end
 
     def to_d
-      reset
+      decimal = 0
       digitize.each_with_index do |digit, power|
-        @decimal += digit * (base**power)
+        decimal += digit * (base**power)
       end
       decimal
     end
@@ -31,12 +30,7 @@ module ToDecimal
     def to_d_with(input, base)
       self.input = format(input)
       self.base  = validate(base)
-      reset
       to_d
-    end
-
-    def reset
-      @decimal = 0
     end
 
     alias_method :to_decimal, :to_d
