@@ -1,71 +1,69 @@
-class Convertor
-  attr_reader :input, :decimal, :base
+module ToDecimal
+  class Convertor
+    attr_reader :input, :decimal, :base
 
-  def initialize(input=0, base=10)
-    @input    = format(input)
-    @base     = validate(base)
-    @decimal  = 0
-  end
-
-  def self.to_d(digit, base)
-    new(digit, base).to_d
-  end
-
-  def input=(integer)
-    @input = format(integer)
-  end
-
-  def base=(integer)
-    @base = validate(integer)
-  end
-
-  def to_d
-    reset
-    digitize.each_with_index do |digit, power|
-      @decimal += digit * (base**power)
+    def initialize(input=0, base=10)
+      @input    = format(input)
+      @base     = validate(base)
+      @decimal  = 0
     end
-    decimal
-  end
 
-  def to_d_with(input, base)
-    self.input = format(input)
-    self.base  = validate(base)
-    reset
-    to_d
-  end
+    def self.to_d(digit, base)
+      new(digit, base).to_d
+    end
 
-  def reset
-    @decimal = 0
-  end
+    def input=(integer)
+      @input = format(integer)
+    end
 
-  alias_method :to_decimal, :to_d
+    def base=(integer)
+      @base = validate(integer)
+    end
 
-  private
-
-  def format(input)
-    if input.is_a?(String) || input.is_a?(Integer)
-      if input.is_a?(String)
-        input.to_i
-      else
-        input
+    def to_d
+      reset
+      digitize.each_with_index do |digit, power|
+        @decimal += digit * (base**power)
       end
-    else
-      raise ArgumentError, "Input number must be Integer or String \
-representation of an Integer"
+      decimal
     end
-  end
 
-  def validate(base)
-    raise ArgumentError, "Base must be an Integer" unless base.is_a?(Integer)
-    raise ArgumentError, "Base must be 1..10" unless base > 0 && base <= 10
-    base
-  end
+    def to_d_with(input, base)
+      self.input = format(input)
+      self.base  = validate(base)
+      reset
+      to_d
+    end
 
-  def digitize
-    input.digits
+    def reset
+      @decimal = 0
+    end
+
+    alias_method :to_decimal, :to_d
+
+    private
+
+    def format(input)
+      if input.is_a?(String) || input.is_a?(Integer)
+        if input.is_a?(String)
+          input.to_i
+        else
+          input
+        end
+      else
+        raise ArgumentError, "Input number must be Integer or String \
+  representation of an Integer"
+      end
+    end
+
+    def validate(base)
+      raise ArgumentError, "Base must be an Integer" unless base.is_a?(Integer)
+      raise ArgumentError, "Base must be 1..10" unless base > 0 && base <= 10
+      base
+    end
+
+    def digitize
+      input.digits
+    end
   end
 end
-
-
-convertor = Convertor.new
-p convertor.to_d_with(1231, 4)
