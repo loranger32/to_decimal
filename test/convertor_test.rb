@@ -23,10 +23,24 @@ def populate_convertor(data_set)
   @convertor.base = data_set[1]
 end
 
-def execute_test_with_values(test_values)
+def execute_test_of_to_d(test_values)
   test_values.each do |data_set|
     populate_convertor(data_set)
     assert_equal data_set[2], @convertor.to_d 
+  end
+end
+
+def execute_test_of_to_d_with(test_values)
+  test_values.each do |data_set|
+    populate_convertor(data_set)
+    assert_equal data_set[2], @convertor.to_d_with(data_set[0], data_set[1])
+  end
+end
+
+def execute_test_of_to_d_class_method(test_values)
+  test_values.each do |data_set|
+    populate_convertor(data_set)
+    assert_equal data_set[2], ToDecimal::Convertor.to_d(data_set[0], data_set[1])
   end
 end
 
@@ -85,7 +99,7 @@ class ToDecimalConvertorTest < Minitest::Test
     assert_equal 4, @convertor.base
   end
 
-  # ========= Testing ArgumentError is raised with invalid arguments ===========
+  # ========= Testing ArgumentError is raised with invalid attributes ==========
 
   def test_raises_an_error_if_input_is_not_string_or_integer
     assert_raises(ArgumentError) { @convertor.input = :sym }
@@ -108,39 +122,39 @@ class ToDecimalConvertorTest < Minitest::Test
 
   # ========= Testing return values of to_d instance method ====================
   def test_to_d_returns_decimal_value_of_number_of_base_2
-    execute_test_with_values(TEST_VALUES_BASE_2)
+    execute_test_of_to_d(TEST_VALUES_BASE_2)
   end
 
   def test_to_d_returns_decimal_value_of_number_of_base_3
-    execute_test_with_values(TEST_VALUES_BASE_3)
+    execute_test_of_to_d(TEST_VALUES_BASE_3)
   end
 
   def test_to_d_returns_decimal_value_of_number_of_base_4
-    execute_test_with_values(TEST_VALUES_BASE_4)
+    execute_test_of_to_d(TEST_VALUES_BASE_4)
   end
 
   def test_to_d_returns_decimal_value_of_number_of_base_5
-    execute_test_with_values(TEST_VALUES_BASE_5)
+    execute_test_of_to_d(TEST_VALUES_BASE_5)
   end
 
   def test_to_d_returns_decimal_value_of_number_of_base_6
-    execute_test_with_values(TEST_VALUES_BASE_6)
+    execute_test_of_to_d(TEST_VALUES_BASE_6)
   end
 
   def test_to_d_returns_decimal_value_of_number_of_base_7
-    execute_test_with_values(TEST_VALUES_BASE_7)
+    execute_test_of_to_d(TEST_VALUES_BASE_7)
   end
 
   def test_to_d_returns_decimal_value_of_number_of_base_8
-    execute_test_with_values(TEST_VALUES_BASE_8)
+    execute_test_of_to_d(TEST_VALUES_BASE_8)
   end
 
   def test_to_d_returns_decimal_value_of_number_of_base_9
-    execute_test_with_values(TEST_VALUES_BASE_9)
+    execute_test_of_to_d(TEST_VALUES_BASE_9)
   end
 
   def test_to_d_returns_decimal_value_of_number_of_base_10
-    execute_test_with_values(TEST_VALUES_BASE_10)
+    execute_test_of_to_d(TEST_VALUES_BASE_10)
   end
 
   # ========= Testing aliased to_decimal instance method =======================
@@ -150,17 +164,7 @@ class ToDecimalConvertorTest < Minitest::Test
     assert_equal(200, convertor.to_decimal)
   end
 
-  # ========== Testing to_d_with instance method ===============================
-
-  def test_to_d_with_returns_the_decimal_version_of_a_number_of_base_8
-    assert_equal(4, @convertor.to_d_with(4, 8))
-    assert_equal(14, @convertor.to_d_with(16, 8))
-  end
-
-  def test_to_d_with_returns_the_decimal_version_of_a_number_of_base_3
-    assert_equal(2, @convertor.to_d_with(2, 3))
-    assert_equal(80, @convertor.to_d_with(2222, 3))
-  end
+  # ========== Testing to_d_with raises error with invalid arguments============
 
   def test_to_d_with_raises_error_if_first_arg_is_not_string_or_integer
     assert_raises(ArgumentError) { @convertor.to_d_with(:sym, 5) }
@@ -181,36 +185,68 @@ class ToDecimalConvertorTest < Minitest::Test
     assert_raises(ArgumentError) { @convertor.to_d_with(456, -8) }
   end
 
-  # ========= Testing to_d class method ========================================
-
-  def test_to_d_class_method_converts_also_string_representation_of_integers
-    assert_equal(5, ToDecimal::Convertor.to_d('101', 2))
-    assert_equal(241, ToDecimal::Convertor.to_d('11110001', 2))
-    assert_equal(4, ToDecimal::Convertor.to_d('4', 8))
-    assert_equal(10, ToDecimal::Convertor.to_d('12', 8))
+  # ======== Testing return values of to_d_with ================================
+  
+  def test_to_d_with_return_decimal_value_of_number_of_base_2
+    execute_test_of_to_d_with(TEST_VALUES_BASE_2)
   end
 
-  def test_to_d_class_method_returns_the_decimal_version_of_a_number_of_base_8
-    assert_equal(4, ToDecimal::Convertor.to_d(4, 8))
-    assert_equal(10, ToDecimal::Convertor.to_d(12, 8))
+    def test_to_d_with_return_decimal_value_of_number_of_base_3
+    execute_test_of_to_d_with(TEST_VALUES_BASE_3)
   end
 
-  def test_to_d_class_method_returns_the_decimal_version_of_a_number_of_base_3
-    assert_equal(2, ToDecimal::Convertor.to_d(2, 3))
-    assert_equal(80, ToDecimal::Convertor.to_d(2222, 3))
+  def test_to_d_with_return_decimal_value_of_number_of_base_4
+    execute_test_of_to_d_with(TEST_VALUES_BASE_4)
   end
 
-  def test_to_d_class_method_returns_the_decimal_version_of_a_number_of_base_2
-    assert_equal(378, ToDecimal::Convertor.to_d("101111010", 2))
-    assert_equal(5, ToDecimal::Convertor.to_d(101, 2))
+  def test_to_d_with_return_decimal_value_of_number_of_base_5
+    execute_test_of_to_d_with(TEST_VALUES_BASE_5)
   end
+
+  def test_to_d_with_return_decimal_value_of_number_of_base_6
+    execute_test_of_to_d_with(TEST_VALUES_BASE_6)
+  end
+
+  def test_to_d_with_return_decimal_value_of_number_of_base_7
+    execute_test_of_to_d_with(TEST_VALUES_BASE_7)
+  end
+
+  def test_to_d_with_return_decimal_value_of_number_of_base_8
+    execute_test_of_to_d_with(TEST_VALUES_BASE_8)
+  end
+
+  def test_to_d_with_return_decimal_value_of_number_of_base_9
+    execute_test_of_to_d_with(TEST_VALUES_BASE_9)
+  end
+
+  def test_to_d_with_return_decimal_value_of_number_of_base_10
+    execute_test_of_to_d_with(TEST_VALUES_BASE_10)
+  end
+
+
+  # ========= Testing to_d class method accepts both string and integer args ===
+
+  def test_to_d_class_method_accepts_integers_for_both_parameters
+    assert_silent { ToDecimal::Convertor.to_d(101, 2) }
+  end
+
+  def test_to_d_class_method_accepts_strings_for_both_parameters
+    assert_silent { ToDecimal::Convertor.to_d('101', '2') }
+  end
+  
+  def test_to_d_class_method_accepts_mixed_strings_and_integers_as_args
+    assert_silent { ToDecimal::Convertor.to_d('101', 2) }
+    assert_silent { ToDecimal::Convertor.to_d(101, '2') } 
+  end
+
+  # ======== Testing to_d class method raises error with invalid parameters ====
 
   def test_to_d_class_method_raises_error_if_first_arg_is_not_string_or_integer
     assert_raises(ArgumentError) { ToDecimal::Convertor.to_d(:sym, 5) }
     assert_raises(ArgumentError) { ToDecimal::Convertor.to_d([4], 5) }
   end
 
-  def test_to_d_class_method_raises_an_error_if_base_arg_is_not_an_integer
+  def test_to_d_class_method_raises_error_if_base_arg_is_not_an_integer_or_str
     assert_raises(ArgumentError) { ToDecimal::Convertor.to_d('222', [5]) }
     assert_raises(ArgumentError) { ToDecimal::Convertor.to_d(45, :sym) }
   end
@@ -222,5 +258,43 @@ class ToDecimalConvertorTest < Minitest::Test
   def test_to_d_class_method_raises_an_error_if_base_arg_is_smaller_than_1
     assert_raises(ArgumentError) { ToDecimal::Convertor.to_d(456, 0) }
     assert_raises(ArgumentError) { ToDecimal::Convertor.to_d(456, -8) }
+  end
+
+  # ======== Testing return values of to_d class method ========================
+  
+  def test_to_d_class_method_returns_decimal_value_of_number_of_base_2
+    execute_test_of_to_d_class_method(TEST_VALUES_BASE_2)
+  end
+
+  def test_to_d_class_method_returns_decimal_value_of_number_of_base_3
+    execute_test_of_to_d_class_method(TEST_VALUES_BASE_3)
+  end
+
+  def test_to_d_class_method_returns_decimal_value_of_number_of_base_4
+    execute_test_of_to_d_class_method(TEST_VALUES_BASE_4)
+  end
+
+  def test_to_d_class_method_returns_decimal_value_of_number_of_base_5
+    execute_test_of_to_d_class_method(TEST_VALUES_BASE_5)
+  end
+
+  def test_to_d_class_method_returns_decimal_value_of_number_of_base_6
+    execute_test_of_to_d_class_method(TEST_VALUES_BASE_6)
+  end
+
+  def test_to_d_class_method_returns_decimal_value_of_number_of_base_7
+    execute_test_of_to_d_class_method(TEST_VALUES_BASE_7)
+  end
+
+  def test_to_d_class_method_returns_decimal_value_of_number_of_base_8
+    execute_test_of_to_d_class_method(TEST_VALUES_BASE_8)
+  end
+
+  def test_to_d_class_method_returns_decimal_value_of_number_of_base_9
+    execute_test_of_to_d_class_method(TEST_VALUES_BASE_9)
+  end
+
+  def test_to_d_class_method_returns_decimal_value_of_number_of_base_10
+    execute_test_of_to_d_class_method(TEST_VALUES_BASE_10)
   end
 end
