@@ -1,19 +1,18 @@
 # to_decimal
 
 A simple gem to convert an integer expressed in bases
-2 up to 10 to a decimal integer.
+ranging from 2 to 10 into a decimal integer to allow simple calculation.
 
-I've looked for a simple way to get a decimal integer from an integer expressed
-in another base lesser or equal to ten, but I didn't found one, so I decided to
-create my own little gem for that. If it already exists, just let me know.
+I've looked for gem/library to do this, but I didn't found one, so I decided to
+create my own little gem for that. If it already exists, let me know.
 
-For more comprehensive tools, see the
+For more comprehensive tools about base converting, see the
 [bases](https://github.com/whatyouhide/bases) or
 [radix](https://github.com/rubyworks/radix) gems.
 
 # Installation
 
-`gem install to_decimal`
+`$ gem install to_decimal`
 
 # Test
 
@@ -75,7 +74,7 @@ with the first argument being the input integer and the second argument the
 base. Works also with a string as firts argument
 
 
-### Class methods
+### Class method
 
 Instead of creating a new object, you can also call a class method `#to_d` on
 the Convertor class itself :
@@ -87,7 +86,8 @@ ToDecimal::Convertor.to_d(1231, 4)
 
 # Contribute
 
-If you think this (very) small gem could be improved, don't hesitate.
+If you think this small gem could be improved in any way, don't hesitate,
+I would be happy to learn. And if you want to contribute, I woudl be happy too !
 
 - Fork it ;
 - Create your own branch (`git checkout -b my-new-feature`) ;
