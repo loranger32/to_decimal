@@ -28,8 +28,11 @@ ToDecimal.to_d(12, base: 8) # => 10
 base8.to_d(12) #=> 10
 ```
 
+And, if any conversion is needed back to the original base, we can just use
+the buit-in Ruby methods on the return value of the method.
+
 So I decided to create this little gem for that. If something similar already
-exists, I woudl be happy to know.
+exists, I would be happy to know.
 
 
 # Installation
@@ -50,60 +53,45 @@ This project is tested under minitest.
 Instantiate a new `Convertor` object :
 
 ```ruby
-convertor = ToDecimal::Convertor.new
-# => a new object with default input number set to 0 and default base 
-# set to 10
+base10 = ToDecimal.new
+# => a new object with default base set to 10
 
 # or
-convertor = ToDecimal::Convertor.new(125)
+base8 = ToDecimal.new(8)
 # or
-convertor = ToDecimal::Convertor.new('125')
-# => a new object with input number set to 125 and default base set to 10
-
-# or
-convertor = ToDecimal::Convertor.new(125, 8)
-# => a new object with input number set to 125 and base set to 8
+base8 = ToDecimal.new('8')
+# => a new object with base set to 8
 ```
 
-Both input number and base attributes can be updated simply :
+The base attribute can be updated simply :
 
 ```ruby
-convertor.input = 120
+base8.base = 3
+
 #or
-convertor.input = '120'
 
-convertor.base = 3
+base8.base = '3'
 ```
 
-To get the input number converted to a base 10 integer :
+To convert a number of a given base to a base 10 integer, use the `#to_d(input)`
+method (alias `#to_decimal`):
 
 ```ruby
-convertor.to_d
+base8.to_d(12) # => 10
 
 # alias
 
-convertor.to_decimal
+convertor.to_decimal(12) # => 10
 ```
-
-To avoid the need of updating both base and input number and calling `#to_d` or 
-`#to_decimal` after that, there is a shortcut:
-
-```ruby
-convertor.to_d_with(1231, 4)
-# => 109
-```
-
-with the first argument being the input integer and the second argument the
-base. Works also with a string as firts argument
-
+An error wil be raised if the input integer is not of the given base.
 
 ### Class method
 
 Instead of creating a new object, you can also call a class method `#to_d` on
-the Convertor class itself :
+the ToDecimal class itself :
 
 ```ruby
-ToDecimal::Convertor.to_d(1231, 4)
+ToDecimal.to_d(1231, base: 4)
 # => 109
 ```
 
