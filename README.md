@@ -1,18 +1,41 @@
 # to_decimal
 
 A simple gem to convert an integer expressed in bases
-ranging from 2 to 10 into a decimal integer to allow simple calculation.
+ranging from 2 to 10 into a decimal integer.
 
-I've looked for gem/library to do this, but I didn't found one, so I decided to
-create my own little gem for that. If it already exists, let me know.
+Ruby comes with useful built-in methods to convert integers and string
+representation of integers to another base (`String#to_i(base=10)` and 
+`Ìnteger#to_s(base=10)`).
 
-For more comprehensive tools about base converting, see the
-[bases](https://github.com/whatyouhide/bases) or
-[radix](https://github.com/rubyworks/radix) gems.
+But I didn't found a simple and straightforward way to convert an integer
+form a given base to an integer of base 10, nor in the core API, nor in the
+Standard Library.
+
+I found the two following gems :
+- [bases](https://github.com/whatyouhide/bases) ;
+- [radix](https://github.com/rubyworks/radix) gems ;
+
+They are very comprehensive, and go both behind the base 36, which is the limit
+of Ruby.
+
+But they are a little too heavy for my purpose. I just wanted something like :
+
+```ruby
+ToDecimal.(12, base: 8) # => 10
+
+#or
+
+base8(12).to_d #=> 10
+```
+
+So I decided to create this little gem for that. If something similar already
+exists, I woudl be happy to know.
+
 
 # Installation
 
 `$ gem install to_decimal`
+`$ bundle install`
 
 # Test
 

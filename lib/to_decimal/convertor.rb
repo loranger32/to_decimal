@@ -1,5 +1,4 @@
 module ToDecimal
-
   def self.to_d(digit, base: 10)
     self::Convertor.new(base).to_d(digit)
   end

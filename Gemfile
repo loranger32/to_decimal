@@ -4,3 +4,4 @@ ruby '2.5.0'
 
 gem 'minitest'
 gem 'minitest-reporters', '~> 1.1'
+gem 'rake'
