@@ -11,7 +11,7 @@ But I didn't found a simple and straightforward way to convert an integer
 form a given base to an integer of base 10, nor in the core API, nor in the
 Standard Library.
 
-I found the two following gems :
+I found the following two gems :
 - [bases](https://github.com/whatyouhide/bases) ;
 - [radix](https://github.com/rubyworks/radix) gems ;
 
@@ -36,9 +36,10 @@ exists, I would be happy to know.
 
 
 # Installation
-
-`$ gem install to_decimal`
-`$ bundle install`
+```shell
+$ gem install to_decimal
+$ bundle install
+```
 
 # Test
 
@@ -50,7 +51,7 @@ This project is tested under minitest.
 
 ### Instance methods
 
-Instantiate a new `Convertor` object :
+Instantiate a new `ToDecimal` object :
 
 ```ruby
 base10 = ToDecimal.new
@@ -98,7 +99,7 @@ ToDecimal.to_d(1231, base: 4)
 # Contribute
 
 If you think this small gem could be improved in any way, don't hesitate,
-I would be happy to learn. And if you want to contribute, I woudl be happy too !
+I would be happy to learn. And if you want to contribute, I would be happy too !
 
 - Fork it ;
 - Create your own branch (`git checkout -b my-new-feature`) ;
