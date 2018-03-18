@@ -25,7 +25,7 @@ ToDecimal.to_d(12, base: 8) # => 10
 
 #or
 
-base8(12).to_d #=> 10
+base8.to_d(12) #=> 10
 ```
 
 So I decided to create this little gem for that. If something similar already
