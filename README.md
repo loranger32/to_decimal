@@ -21,7 +21,7 @@ of Ruby.
 But they are a little too heavy for my purpose. I just wanted something like :
 
 ```ruby
-ToDecimal.(12, base: 8) # => 10
+ToDecimal.to_d(12, base: 8) # => 10
 
 #or
 
