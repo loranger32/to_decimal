@@ -1,4 +1,1 @@
-require_relative 'to_decimal/convertor'
-
-module ToDecimal
-end
+require_relative 'to_decimal/to_decimal'
