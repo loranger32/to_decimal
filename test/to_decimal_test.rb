@@ -173,9 +173,9 @@ class ToDecimalConvertorTest < Minitest::Test
 
   # ========= Testing aliased to_decimal instance method =======================
 
-  def test_to_decimal_is_alias_for_to_d
+  def test_square_brackets_is_alias_for_to_d
     convertor = ToDecimal.new(10)
-    assert_equal(200, convertor.to_decimal(200))
+    assert_equal(200, convertor[200])
   end
 
   # ========= Testing to_d class method accepts both string and integer args ===

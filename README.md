@@ -23,9 +23,13 @@ But they are a little too heavy for my purpose. I just wanted something like :
 ```ruby
 ToDecimal.to_d(12, base: 8) # => 10
 
-#or
+# or
 
-base8.to_d(12) #=> 10
+base8.to_d(12) # => 10
+
+# or even
+
+base8[12] # => 10 
 ```
 
 And, if any conversion is needed back to the original base, we can just use
@@ -82,7 +86,7 @@ base8.to_d(12) # => 10
 
 # alias
 
-convertor.to_decimal(12) # => 10
+convertor[12] # => 10
 ```
 An error wil be raised if the input integer is not of the given base.
 

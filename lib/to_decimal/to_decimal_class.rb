@@ -23,7 +23,7 @@ class ToDecimal
     decimal
   end
 
-  alias_method :to_decimal, :to_d
+  alias_method :[], :to_d
 
   private
 
