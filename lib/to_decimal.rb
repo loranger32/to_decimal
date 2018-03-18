@@ -1,1 +1,2 @@
-require_relative 'to_decimal/to_decimal'
+require_relative 'to_decimal/to_decimal_class'
+require_relative 'to_decimal/wrong_base_input_error'

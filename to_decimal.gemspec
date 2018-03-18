@@ -9,7 +9,8 @@ Gem::Specification.new do |s|
                   EOF
   s.authors     = ["Laurent Guinotte"]
   s.email       = 'laurentguinotte@icloud.com'
-  s.files       = ["lib/to_decimal.rb", 'lib/to_decimal/convertor.rb']
+  s.files       = ['lib/to_decimal.rb', 'lib/to_decimal/to_decimal_class.rb',
+                   'lib/to_decimal/wrong_base_input_error']
   s.homepage    =
     'https://github.com/loranger32/to_decimal'
   s.license     = 'MIT'

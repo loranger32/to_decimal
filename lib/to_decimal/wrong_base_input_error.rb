@@ -1,0 +1,1 @@
+class WrongBaseInputError < ArgumentError; end

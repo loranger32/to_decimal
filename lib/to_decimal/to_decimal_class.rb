@@ -53,7 +53,7 @@ expected as input or base"
 
   def validate_input(formatted_input)
     if formatted_input.any? { |digit| digit >= base }
-      raise ArgumentError, "A number of base #{base} cannot have a digit\
+      raise WrongBaseInputError, "A number of base #{base} cannot have a digit\
 greater or equal to #{base}. Check your input: #{formatted_input.reverse.join}"
     end
   end

@@ -88,49 +88,49 @@ class ToDecimalConvertorTest < Minitest::Test
   
   def test_to_d_raises_error_if_input_is_not_from_base_2
     @convertor.base = 2
-    assert_raises(ArgumentError) { @convertor.to_d(2) }
-    assert_raises(ArgumentError) { @convertor.to_d(9) }
+    assert_raises(WrongBaseInputError) { @convertor.to_d(2) }
+    assert_raises(WrongBaseInputError) { @convertor.to_d(9) }
   end
 
   def test_to_d_raises_error_if_input_is_not_from_base_3
     @convertor.base = 3
-    assert_raises(ArgumentError) { @convertor.to_d(3) }
-    assert_raises(ArgumentError) { @convertor.to_d(9) }
+    assert_raises(WrongBaseInputError) { @convertor.to_d(3) }
+    assert_raises(WrongBaseInputError) { @convertor.to_d(9) }
   end
 
   def test_to_d_raises_error_if_input_is_not_from_base_4
     @convertor.base = 4
-    assert_raises(ArgumentError) { @convertor.to_d(4) }
-    assert_raises(ArgumentError) { @convertor.to_d(9) }
+    assert_raises(WrongBaseInputError) { @convertor.to_d(4) }
+    assert_raises(WrongBaseInputError) { @convertor.to_d(9) }
   end
 
   def test_to_d_raises_error_if_input_is_not_from_base_5
     @convertor.base = 5
-    assert_raises(ArgumentError) { @convertor.to_d(5) }
-    assert_raises(ArgumentError) { @convertor.to_d(9) }
+    assert_raises(WrongBaseInputError) { @convertor.to_d(5) }
+    assert_raises(WrongBaseInputError) { @convertor.to_d(9) }
   end
 
   def test_to_d_raises_error_if_input_is_not_from_base_6
     @convertor.base = 6
-    assert_raises(ArgumentError) { @convertor.to_d(6) }
-    assert_raises(ArgumentError) { @convertor.to_d(9) }
+    assert_raises(WrongBaseInputError) { @convertor.to_d(6) }
+    assert_raises(WrongBaseInputError) { @convertor.to_d(9) }
   end
 
   def test_to_d_raises_error_if_input_is_not_from_base_7
     @convertor.base = 7
-    assert_raises(ArgumentError) { @convertor.to_d(7) }
-    assert_raises(ArgumentError) { @convertor.to_d(9) }
+    assert_raises(WrongBaseInputError) { @convertor.to_d(7) }
+    assert_raises(WrongBaseInputError) { @convertor.to_d(9) }
   end
 
   def test_to_d_raises_error_if_input_is_not_from_base_8
     @convertor.base = 8
-    assert_raises(ArgumentError) { @convertor.to_d(8) }
-    assert_raises(ArgumentError) { @convertor.to_d(9) }
+    assert_raises(WrongBaseInputError) { @convertor.to_d(8) }
+    assert_raises(WrongBaseInputError) { @convertor.to_d(9) }
   end
 
   def test_to_d_raises_error_if_input_is_not_from_base_9
     @convertor.base = 9
-    assert_raises(ArgumentError) { @convertor.to_d(9) }
+    assert_raises(WrongBaseInputError) { @convertor.to_d(9) }
   end
 
   # ========= Testing return values of to_d instance method ====================
