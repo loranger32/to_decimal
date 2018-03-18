@@ -3,19 +3,11 @@ module ToDecimal
     self::Convertor.new(base).to_d(digit)
   end
 
-  def self.from_base_8
-    self::Convertor.new(8)
-  end
-
   class Convertor
     attr_reader :input, :base
 
     def initialize(base=10)
       @base = format_and_validate(base)
-    end
-
-    def input=(new_input)
-      @input = format(new_input)
     end
 
     def base=(new_base)
@@ -24,17 +16,12 @@ module ToDecimal
 
     def to_d(input)
       formatted_input = format(input).digits
+      validate_input(formatted_input)
       decimal = 0
       formatted_input.each_with_index do |digit, power|
         decimal += digit * (base**power)
       end
       decimal
-    end
-
-    def to_d_with(new_input, new_base)
-      self.input = format(new_input)
-      self.base  = format_and_validate(new_base)
-      to_d
     end
 
     alias_method :to_decimal, :to_d
@@ -64,5 +51,18 @@ module ToDecimal
       validate_base(formatted_base)
       formatted_base
     end
+
+    def validate_input(formatted_input)
+      if formatted_input.any? { |digit| digit >= base }
+        raise ArgumentError, "A number of base #{base} cannot have a digit\
+ greater or equal to #{base}. Check your input: #{formatted_input.reverse.join}"
+      end
+    end
   end
 end
+
+
+base8 = ToDecimal::Convertor.new(8)
+
+p base8.to_d(69)
+p ToDecimal.to_d(12, base: 8)
