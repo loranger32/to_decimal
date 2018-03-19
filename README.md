@@ -86,14 +86,14 @@ base8.to_d(12) # => 10
 
 # alias
 
-convertor[12] # => 10
+base8[12] # => 10
 ```
 An error wil be raised if the input integer is not of the given base.
 
 ### Class method
 
 Instead of creating a new object, you can also call a class method `#to_d` on
-the ToDecimal class itself :
+the `ToDecimal class itself :
 
 ```ruby
 ToDecimal.to_d(1231, base: 4)
