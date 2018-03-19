@@ -2,8 +2,8 @@ require 'rake'
 
 Gem::Specification.new do |s|
   s.name        = 'to_decimal'
-  s.version     = '0.0.1'
-  s.date        = '2018-03-16'
+  s.version     = '0.0.2'
+  s.date        = '2018-03-21'
   s.summary     = "A simple integer converter from bases 2..10 to decimal integers"
   s.description = <<~EOF
                   Provides a simple way to convert an integer expressed in bases
@@ -16,8 +16,7 @@ Gem::Specification.new do |s|
     'https://github.com/loranger32/to_decimal'
   s.license     = 'MIT'
 
-  # This gem works for Ruby >= 2.5.0
-  s.required_ruby_version = '>= 2.5.0'
+  s.required_ruby_version = '>= 2.4.0'
 
   s.add_development_dependency 'bundler', '~> 1.16'
   s.add_development_dependency 'rake', '~> 12.3'

@@ -1,5 +1,5 @@
 class ToDecimal
-  attr_reader :input, :base
+  attr_reader :base
 
   def self.to_d(digit, base: 10)
     self.new(base).to_d(digit)
