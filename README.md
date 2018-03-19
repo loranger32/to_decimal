@@ -79,7 +79,7 @@ base8.base = '3'
 ```
 
 To convert a number of a given base to a base 10 integer, use the `#to_d(input)`
-method (alias `#to_decimal`):
+method (alias `#[]`):
 
 ```ruby
 base8.to_d(12) # => 10
