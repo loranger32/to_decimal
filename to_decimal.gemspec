@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.metadata = {
     "source_code_uri" => "https://github.com/loranger32/to_decimal",
-    "changelog_uri"   => "https://github.com/blob/master/CHANGELOG.md"
+    "changelog_uri"   => "https://github.com/loranger32/blob/master/CHANGELOG.md"
   }
 
 
