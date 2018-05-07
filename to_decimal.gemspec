@@ -16,7 +16,13 @@ Gem::Specification.new do |s|
     'https://github.com/loranger32/to_decimal'
   s.license     = 'MIT'
 
-  s.required_ruby_version = '>= 2.4.0'
+  s.required_ruby_version = '>= 2.4.1'
+
+  s.metadata = {
+    "source_code_uri" => "https://github.com/loranger32/to_decimal",
+    "changelog_uri"   => "https://github.com/blob/master/CHANGELOG.md"
+  }
+
 
   s.add_development_dependency 'bundler', '~> 1.16'
   s.add_development_dependency 'rake', '~> 12.3'
