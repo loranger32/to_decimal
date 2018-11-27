@@ -12,7 +12,8 @@ you need to proceed like this (AFAIK):
 
 `12.to_s.to_i(8) => 10`
 
-Not bad, but I thought there could be a more straightforward and consise way to
+It's not a concern if you need to to this occasionally, but I thought there
+could be a more straightforward and consise way to
 perform this, showing more clearly what your intent is.
 
 I've looked in the core API and in the Standard Library, but I didn't find
