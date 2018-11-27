@@ -4,17 +4,35 @@ A simple gem to convert an integer expressed in bases
 ranging from 2 to 10 into a decimal integer.
 
 Ruby comes with useful built-in methods to convert integers and string
-representation of integers to another base (`String#to_i(base=10)` and 
-`Integer#to_s(base=10)`).
+representation of integers to another base ([`String#to_i(base=10)](http://ruby-doc.org/core-2.5.3/String.html#method-i-to_i)` and 
+[`Integer#to_s(base=10)`](http://ruby-doc.org/core-2.5.3/Integer.html#method-i-to_s).
 
-But if you want to convert an integer of say, base 8, to an integer of base 10,
+You can also use prefixes with [the number litteral notation](https://ruby-doc.com/core-2.5.2/doc/syntax/literals_rdoc.html#label-Numbers),
+but it only works for binary, octal, decimal and hexadecimal notation:
+```ruby
+# binary
+0b10111 # => 23
+
+# octal
+0o27 # => 23
+
+# decimal
+0d23 # => 23
+
+# hexadecimal
+0x17 # => 23
+```
+
+But if you want to convert an integer of say, base 6, to an integer of base 10,
 you need to proceed like this (AFAIK):
+```ruby
+12.to_s.to_i(6) # => 8
+```
 
-`12.to_s.to_i(8) => 10`
-
-It's not a concern if you need to to this occasionally, but I thought there
-could be a more straightforward and consise way to
-perform this, showing more clearly what your intent is.
+It's not a concern if you need to do this occasionally, or if you can easily
+manage using prefixes, but I thought there could be a more straightforward,
+consise and explicit way to perform this, showing more clearly what your intent
+is.
 
 I've looked in the core API and in the Standard Library, but I didn't find
 anything. 
@@ -24,11 +42,11 @@ I found the following two gems :
 - [radix](https://github.com/rubyworks/radix) ;
 
 They are very comprehensive, go both behind the base 36, which is the limit
-of Ruby, and allow to vonvert bases back and forth.
+of Ruby, and allow to convert form bases back and forth.
 
 But they were a little too heavy for my purpose, which was simply
-converting from a base lesser or equal than 10 and to return an integer.
-
+converting from a base lesser or equal than 10 and to return an integer
+expressed in base 10. So I decided to write my own gem.
 
 # Installation
 ```shell
@@ -63,15 +81,17 @@ base8[12] # => 10
 base8['12'] # => 10
 ```
 
-An `WrongBaseInputError` will be raised if the input (or string) integer is not
-of the given base. Compare this with `0` being returned when you use the 
-`Integer.to_s(#base).to_i` method chaining.
-
+These objects and associate `[]` method are basically wrappers for the
+`Integer.to_s.to_i(original_base)` or `String.to_i(original_base)` methods,
+with a custom error when the input is not of the excpected base, or not a valid
+string representation of an integer. In this case, you will get
+a `WrongBaseInputError` if the integer or string argument is not of
+the given base, instead of the default results of the previous methods, which
+can lead to unexpected results if drown into some other computations.
 
 # Contribute
 
-If you think this small gem could be improved in any way, don't hesitate,
-I would be happy to learn. And if you want to contribute, I would be happy too !
+Think it could be better ? Great !
 
 - Fork it ;
 - Create your own branch (`git checkout -b my-new-feature`) ;
