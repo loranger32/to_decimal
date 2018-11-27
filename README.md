@@ -5,38 +5,53 @@ ranging from 2 to 10 into a decimal integer.
 
 Ruby comes with useful built-in methods to convert integers and string
 representation of integers to another base (`String#to_i(base=10)` and 
-`Ìnteger#to_s(base=10)`).
+`Integer#to_s(base=10)`).
 
-But I didn't found a simple and straightforward way to convert an integer
-form a given base to an integer of base 10, nor in the core API, nor in the
-Standard Library.
+But if you want to convert an integer of say, base 8, to an integer of base 10,
+you need to proceed like this (at least AFAIK):
+
+`12.to_s.to_i(8) => 10`
+
+Not bad, but I thought there could be a more straightforward and consise way to
+perform this, shwoing more clearly what your intent is.
+
+I've looked in the core API and in the Standard Library, but I didn't find
+anything. 
 
 I found the following two gems :
 - [bases](https://github.com/whatyouhide/bases) ;
-- [radix](https://github.com/rubyworks/radix) gems ;
+- [radix](https://github.com/rubyworks/radix) ;
 
-They are very comprehensive, and go both behind the base 36, which is the limit
-of Ruby.
+They are very comprehensive, go both behind the base 36, which is the limit
+of Ruby, and allow to vonvert bases back and forth.
 
-But they are a little too heavy for my purpose. I just wanted something like :
+But they are a little too heavy for my purpose, whcih was simply
+converting from a base lesser or equal than 10 and to return an integer.
+
+So I decided to create my own convinence gem.
 
 ```ruby
+# Verbose, but explicit
 ToDecimal.to_d(12, base: 8) # => 10
 
-# or
-
+# Less verbose, still explicit
 base8.to_d(12) # => 10
 
-# or even
-
+# Concise and explicit
 base8[12] # => 10 
 ```
 
-And, if any conversion is needed back to the original base, we can just use
-the buit-in Ruby methods on the return value of the method.
+If any conversion is needed back to the original base, you can use the Ruby
+methods:
 
-So I decided to create this little gem for that. If something similar already
-exists, I would be happy to know.
+```ruby
+base8[12].to_s(8).to_i # => 12
+```
+
+But if you need to frequently go back to the original base, you'd probably
+better use either [radix](https://github.com/rubyworks/radix) or 
+[bases](https://github.com/whatyouhide/bases) gems, which are more suited to
+this kind of operations.
 
 
 # Installation
