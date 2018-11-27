@@ -49,8 +49,9 @@ This project is tested under minitest.
 The gem gives you access to 9 objects under the namespace `ToDecimal` called :
 `Base2`, `Base3`,... `Base10`.
 
-Ecah object has a `[]` method, which takes as parameter an integer of the
-corresponding base and returns this integer expressed in base 10 :
+Each object has a `[]` method, which takes as parameter an integer OR a string
+representation of the corresponding base and returns this integer expressed
+in base 10 :
 
 ```ruby
 base2 = ToDecimal::Base2
@@ -58,10 +59,12 @@ base2[10] # => 2
 
 base8 = ToDecimal::Base8
 base8[12] # => 10
+
+base8['12'] # => 10
 ```
 
-An `WrongBaseInputError` will be raised if the input integer is not of the
-given base. Compare this with `0` being returned when you use the 
+An `WrongBaseInputError` will be raised if the input (or string) integer is not
+of the given base. Compare this with `0` being returned when you use the 
 `Integer.to_s(#base).to_i` method chaining.
 
 
