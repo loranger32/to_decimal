@@ -76,7 +76,7 @@ class ToDecimalBaseValidationTest < Minitest::Test
   end
 end
 
-  # ========= Testing return values of [] instance method ====================
+# ========= Testing return values of [] instance method ======================
 class ToDecimalConvserionTest < Minitest::Test
   def test_returns_decimal_value_of_number_of_base_2
     execute_test_with(TEST_VALUES_BASE_2, ToDecimal::Base2)
