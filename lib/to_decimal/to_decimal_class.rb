@@ -27,7 +27,7 @@ module ToDecimal
         end
       else
         raise ArgumentError, "Integer or String representation of an Integer\
-  expected as input or base"
+ expected as argument"
       end
     end
 
@@ -45,7 +45,7 @@ module ToDecimal
     def validate_input(formatted_input)
       if formatted_input.any? { |digit| digit >= base }
         raise WrongBaseInputError, "A number of base #{base} cannot have a digit\
-  greater or equal to #{base}. Check your input: #{formatted_input.reverse.join}"
+ greater or equal to #{base}. Check your argument: #{formatted_input.reverse.join}"
       end
     end
   end
