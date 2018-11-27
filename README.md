@@ -25,7 +25,7 @@ I found the following two gems :
 They are very comprehensive, go both behind the base 36, which is the limit
 of Ruby, and allow to vonvert bases back and forth.
 
-But they are a little too heavy for my purpose, whcih was simply
+But they are a little too heavy for my purpose, which was simply
 converting from a base lesser or equal than 10 and to return an integer.
 
 So I decided to create my own convinence gem.
@@ -93,6 +93,7 @@ base8.base = 3
 base8.base = '3'
 ```
 
+
 To convert a number of a given base to a base 10 integer, use the `#to_d(input)`
 method (alias `#[]`):
 
@@ -103,7 +104,10 @@ base8.to_d(12) # => 10
 
 base8[12] # => 10
 ```
-An error wil be raised if the input integer is not of the given base.
+
+An `WrongBaseInputError` will be raised if the input integer is not of the
+given base. Compare this with `0` being return when you use the 
+`Integer.to_s(#base).to_i` method chaining.
 
 ### Class method
 
