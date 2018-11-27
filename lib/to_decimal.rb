@@ -1,8 +1,9 @@
-require_relative 'to_decimal/to_decimal_class'
+require_relative 'to_decimal/validator_class'
+require_relative 'to_decimal/convertor_class'
 require_relative 'to_decimal/wrong_base_input_error'
 
 module ToDecimal
-  Base2 = Convertor.new(2).freeze
+  Base2 = Convertor.new(2)
   Base3 = Convertor.new(3)
   Base4 = Convertor.new(4)
   Base5 = Convertor.new(5)

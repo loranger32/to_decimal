@@ -89,6 +89,8 @@ a `WrongBaseInputError` if the integer or string argument is not of
 the given base, instead of the default results of the previous methods, which
 can lead to unexpected results if drown into some other computations.
 
+The objects are frozen and no new object can be instantiated.
+
 # Contribute
 
 Think it could be better ? Great !
