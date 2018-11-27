@@ -10,7 +10,7 @@ module ToDecimal
   Base7 = Convertor.new(7)
   Base8 = Convertor.new(8)
   Base9 = Convertor.new(9)
-  Base10 = Convertor.new
+  Base10 = Convertor.new(10)
 
   class Convertor
     class << self
