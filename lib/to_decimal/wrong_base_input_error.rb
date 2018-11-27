@@ -1,1 +1,3 @@
-class WrongBaseInputError < ArgumentError; end
+module ToDecimal
+  class WrongBaseInputError < ArgumentError; end
+end
