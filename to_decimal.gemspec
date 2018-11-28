@@ -2,8 +2,8 @@ require 'rake'
 
 Gem::Specification.new do |s|
   s.name        = 'to_decimal'
-  s.version     = '0.0.3'
-  s.date        = '2018-11-27'
+  s.version     = '1.0.0'
+  s.date        = '2018-11-28'
   s.summary     = "A simple integer converter from bases 2..10 to decimal integers"
   s.description = <<~EOF
                   Provides a simple way to convert an integer expressed in bases
