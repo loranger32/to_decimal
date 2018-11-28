@@ -9,13 +9,18 @@ module ToDecimal
     end
 
     def [](input)
+      input = remove_leading_zeros_of(input)
       Validator.new(input, base).validate
-
+      
       input_as_integer = integerize(input)
       convert(input_as_integer)
     end
 
     private
+
+    def remove_leading_zeros_of(input)
+      input.is_a?(String) ? input.sub(/\A0+/, '') : input
+    end
 
     def convert(integer)
       integer.to_s.to_i(base)
