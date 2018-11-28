@@ -4,19 +4,7 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 require_relative '../lib/to_decimal'
 
-# ========== Data for the tests ================================================
-
-TEST_VALUES_BASE_2 = [[101, 5], [100_000_000, 256]]
-TEST_VALUES_BASE_3 = [[1122111, 1201], [12, 5]]
-TEST_VALUES_BASE_4 = [[11001, 321], [322, 58]]
-TEST_VALUES_BASE_5 = [[14, 9], [10011302, 78952]]
-TEST_VALUES_BASE_6 = [[13, 9], [1405304, 78952]]
-TEST_VALUES_BASE_7 = [[12, 9], [446116, 78952]]
-TEST_VALUES_BASE_8 = [[11, 9], [232150, 78952]]
-TEST_VALUES_BASE_9 = [[10, 9], [130264, 78952]]
-TEST_VALUES_BASE_10 = [[9, 9], [78952, 78952]]
-
-# ========== Test helper methods ===============================================
+# ========== Test helper method ================================================
 
 def execute_test_with(test_values, base_convertor)
   test_values.each do |data_set|
@@ -26,7 +14,7 @@ end
 
 class ToDecimalBaseValidationTest < Minitest::Test
 
-  # ======== Testing error is raises if input is not of the correct base =======
+# ======== Testing error is raises if input is not of the correct base =========
   
   def test_raises_error_if_input_is_not_from_base_2
     base2 = ToDecimal::Base2
@@ -76,41 +64,150 @@ class ToDecimalBaseValidationTest < Minitest::Test
   end
 end
 
-# ========= Testing return values of [] instance method ======================
-class ToDecimalConvserionTest < Minitest::Test
-  def test_returns_decimal_value_of_number_of_base_2
+# ========= Testing return values of [] instance method ========================
+
+class ToDecimalConvserionFromIntegerTest < Minitest::Test
+
+  # Test data
+  TEST_VALUES_BASE_2 = [[101, 5], [100_000_000, 256]]
+  TEST_VALUES_BASE_3 = [[1122111, 1201], [12, 5]]
+  TEST_VALUES_BASE_4 = [[11001, 321], [322, 58]]
+  TEST_VALUES_BASE_5 = [[14, 9], [10011302, 78952]]
+  TEST_VALUES_BASE_6 = [[13, 9], [1405304, 78952]]
+  TEST_VALUES_BASE_7 = [[12, 9], [446116, 78952]]
+  TEST_VALUES_BASE_8 = [[11, 9], [232150, 78952]]
+  TEST_VALUES_BASE_9 = [[10, 9], [130264, 78952]]
+  TEST_VALUES_BASE_10 = [[9, 9], [78952, 78952]]
+
+  def test_returns_decimal_value_of_integer_of_base_2
     execute_test_with(TEST_VALUES_BASE_2, ToDecimal::Base2)
   end
 
-  def test_returns_decimal_value_of_number_of_base_3
+  def test_returns_decimal_value_of_integer_of_base_3
     execute_test_with(TEST_VALUES_BASE_3, ToDecimal::Base3)
   end
 
-  def test_returns_decimal_value_of_number_of_base_4
+  def test_returns_decimal_value_of_integer_of_base_4
     execute_test_with(TEST_VALUES_BASE_4, ToDecimal::Base4)
   end
 
-  def test_returns_decimal_value_of_number_of_base_5
+  def test_returns_decimal_value_of_integer_of_base_5
     execute_test_with(TEST_VALUES_BASE_5, ToDecimal::Base5)
   end
 
-  def test_returns_decimal_value_of_number_of_base_6
+  def test_returns_decimal_value_of_integer_of_base_6
     execute_test_with(TEST_VALUES_BASE_6, ToDecimal::Base6)
   end
 
-  def test_returns_decimal_value_of_number_of_base_7
+  def test_returns_decimal_value_of_integer_of_base_7
     execute_test_with(TEST_VALUES_BASE_7, ToDecimal::Base7)
   end
 
-  def test_returns_decimal_value_of_number_of_base_8
+  def test_returns_decimal_value_of_integer_of_base_8
     execute_test_with(TEST_VALUES_BASE_8, ToDecimal::Base8)
   end
 
-  def test_returns_decimal_value_of_number_of_base_9
+  def test_returns_decimal_value_of_integer_of_base_9
     execute_test_with(TEST_VALUES_BASE_9, ToDecimal::Base9)
   end
 
-  def test_returns_decimal_value_of_number_of_base_10
+  def test_returns_decimal_value_of_integer_of_base_10
+    execute_test_with(TEST_VALUES_BASE_10, ToDecimal::Base10)
+  end
+end
+
+class ToDecimalConvserionFromStringTest < Minitest::Test
+  TEST_VALUES_BASE_2 = [['101', 5], ['100000000', 256]]
+  TEST_VALUES_BASE_3 = [['1122111', 1201], ['12', 5]]
+  TEST_VALUES_BASE_4 = [['11001', 321], ['322', 58]]
+  TEST_VALUES_BASE_5 = [['14', 9], ['10011302', 78952]]
+  TEST_VALUES_BASE_6 = [['13', 9], ['1405304', 78952]]
+  TEST_VALUES_BASE_7 = [['12', 9], ['446116', 78952]]
+  TEST_VALUES_BASE_8 = [['11', 9], ['232150', 78952]]
+  TEST_VALUES_BASE_9 = [['10', 9], ['130264', 78952]]
+  TEST_VALUES_BASE_10 = [['9', 9], ['78952', 78952]]
+
+  def test_returns_decimal_value_of_string_of_base_2
+    execute_test_with(TEST_VALUES_BASE_2, ToDecimal::Base2)
+  end
+
+  def test_returns_decimal_value_of_string_of_base_3
+    execute_test_with(TEST_VALUES_BASE_3, ToDecimal::Base3)
+  end
+
+  def test_returns_decimal_value_of_string_of_base_4
+    execute_test_with(TEST_VALUES_BASE_4, ToDecimal::Base4)
+  end
+
+  def test_returns_decimal_value_of_string_of_base_5
+    execute_test_with(TEST_VALUES_BASE_5, ToDecimal::Base5)
+  end
+
+  def test_returns_decimal_value_of_string_of_base_6
+    execute_test_with(TEST_VALUES_BASE_6, ToDecimal::Base6)
+  end
+
+  def test_returns_decimal_value_of_string_of_base_7
+    execute_test_with(TEST_VALUES_BASE_7, ToDecimal::Base7)
+  end
+
+  def test_returns_decimal_value_of_string_of_base_8
+    execute_test_with(TEST_VALUES_BASE_8, ToDecimal::Base8)
+  end
+
+  def test_returns_decimal_value_of_string_of_base_9
+    execute_test_with(TEST_VALUES_BASE_9, ToDecimal::Base9)
+  end
+
+  def test_returns_decimal_value_of_string_of_base_10
+    execute_test_with(TEST_VALUES_BASE_10, ToDecimal::Base10)
+  end
+end
+
+class RemoveLeadingZeroesFromStringsTest < Minitest::Test
+  TEST_VALUES_BASE_2 = [['00101', 5], ['0100000000', 256]]
+  TEST_VALUES_BASE_3 = [['001122111', 1201], ['012', 5]]
+  TEST_VALUES_BASE_4 = [['0011001', 321], ['322', 58]]
+  TEST_VALUES_BASE_5 = [['0014', 9], ['010011302', 78952]]
+  TEST_VALUES_BASE_6 = [['0013', 9], ['01405304', 78952]]
+  TEST_VALUES_BASE_7 = [['0012', 9], ['0446116', 78952]]
+  TEST_VALUES_BASE_8 = [['0011', 9], ['0232150', 78952]]
+  TEST_VALUES_BASE_9 = [['0010', 9], ['0130264', 78952]]
+  TEST_VALUES_BASE_10 = [['009', 9], ['078952', 78952]]
+
+  def test_removes_leading_zeros_from_string_with_base2
+    execute_test_with(TEST_VALUES_BASE_2, ToDecimal::Base2)
+  end
+
+  def test_removes_leading_zeros_from_string_with_base3
+    execute_test_with(TEST_VALUES_BASE_3, ToDecimal::Base3)
+  end
+
+  def test_removes_leading_zeros_from_string_with_base4
+    execute_test_with(TEST_VALUES_BASE_4, ToDecimal::Base4)
+  end
+
+  def test_removes_leading_zeros_from_string_with_base5
+    execute_test_with(TEST_VALUES_BASE_5, ToDecimal::Base5)
+  end
+
+  def test_removes_leading_zeros_from_string_with_base6
+    execute_test_with(TEST_VALUES_BASE_6, ToDecimal::Base6)
+  end
+
+  def test_removes_leading_zeros_from_string_with_base7
+    execute_test_with(TEST_VALUES_BASE_7, ToDecimal::Base7)
+  end
+
+  def test_removes_leading_zeros_from_string_with_base8
+    execute_test_with(TEST_VALUES_BASE_8, ToDecimal::Base8)
+  end
+
+  def test_removes_leading_zeros_from_string_with_base9
+    execute_test_with(TEST_VALUES_BASE_9, ToDecimal::Base9)
+  end
+
+  def test_removes_leading_zeros_from_string_with_base10
     execute_test_with(TEST_VALUES_BASE_10, ToDecimal::Base10)
   end
 end
