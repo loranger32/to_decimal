@@ -4,11 +4,14 @@ A simple gem to convert an integer expressed in bases
 ranging from 2 to 10 into a decimal integer.
 
 Ruby comes with useful built-in methods to convert integers and string
-representation of integers to another base ([`String#to_i(base=10)](http://ruby-doc.org/core-2.5.3/String.html#method-i-to_i)` and 
+representation of integers to another base ([`String#to_i(base=10)](http://ruby-doc.org/core-2.5.3/String.html#method-i-to_i)`,
+`[Kernel#Integer(arg, base=0)](https://ruby-doc.com/core-2.5.2/Kernel.html#method-i-Integer)` and 
 [`Integer#to_s(base=10)`](http://ruby-doc.org/core-2.5.3/Integer.html#method-i-to_s).
 
-You can also use prefixes with [the number litteral notation](https://ruby-doc.com/core-2.5.2/doc/syntax/literals_rdoc.html#label-Numbers),
-but it only works for binary, octal, decimal and hexadecimal notation:
+You can also use prefixes with [litteral numeric constant](https://ruby-doc.com/core-2.5.2/doc/syntax/literals_rdoc.html#label-Numbers),
+but it only works for binary, octal, decimal and hexadecimal notation (which cover
+the most usecases):
+
 ```ruby
 # binary
 0b10111 # => 23
@@ -79,6 +82,7 @@ base8 = ToDecimal::Base8
 base8[12] # => 10
 
 base8['12'] # => 10
+base8['012'] # => 10
 ```
 
 These objects and associate `[]` method are basically wrappers for the
@@ -89,7 +93,18 @@ a `WrongBaseInputError` if the integer or string argument is not of
 the given base, instead of the default results of the previous methods, which
 can lead to unexpected results if drown into some other computations.
 
-The objects are frozen and no new object can be instantiated.
+The objects are frozen and no new `Convertor` object can be instantiated.
+
+The benefit you may find using this gem are:
+
+- argument validation : you avoid the standard behavior of the different built-in
+methods, which sometimes throw an error (`Kernel#Integer(arg, base)`) or worse,
+silently stop the conversion process when they encounter an invalid character, returning the result of the conversion so far. Instead, you have a consistent
+behavior, and you are free to decide what to do with the error.
+
+- allow you to work with strings with leading zeros : in this case, zeros are removed form the beginning of the string, avoiding the implict conversion in
+base 8, which is, most of the time, not what you want ;
+
 
 # Contribute
 
