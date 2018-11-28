@@ -16,7 +16,7 @@ module ToDecimal
     private
 
     def valid_integer_string_or_integer?
-       @input.is_a?(Integer) || @input.is_a?(String) && @input.to_i.to_s = @input
+       @input.is_a?(Integer) || (@input.is_a?(String) && @input.to_i.to_s == @input)
     end
 
     def valid_input_base?
