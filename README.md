@@ -4,8 +4,8 @@ A simple gem to convert an integer expressed in bases
 ranging from 2 to 10 into a decimal integer.
 
 Ruby comes with useful built-in methods to convert integers and string
-representation of integers to another base ([`String#to_i(base=10)](http://ruby-doc.org/core-2.5.3/String.html#method-i-to_i)`,
-`[Kernel#Integer(arg, base=0)](https://ruby-doc.com/core-2.5.2/Kernel.html#method-i-Integer)` and 
+representations of integers to another base ([`String#to_i(base=10)`](http://ruby-doc.org/core-2.5.3/String.html#method-i-to_i),
+[`Kernel#Integer(arg, base=0)`](https://ruby-doc.com/core-2.5.2/Kernel.html#method-i-Integer) and 
 [`Integer#to_s(base=10)`](http://ruby-doc.org/core-2.5.3/Integer.html#method-i-to_s).
 
 You can also use prefixes with [litteral numeric constant](https://ruby-doc.com/core-2.5.2/doc/syntax/literals_rdoc.html#label-Numbers),
@@ -28,6 +28,7 @@ the most usecases):
 
 But if you want to convert an integer of say, base 6, to an integer of base 10,
 you need to proceed like this (AFAIK):
+
 ```ruby
 12.to_s.to_i(6) # => 8
 ```
@@ -70,7 +71,7 @@ This project is tested under minitest.
 The gem gives you access to 9 objects under the namespace `ToDecimal` called :
 `Base2`, `Base3`,... `Base10`.
 
-Each object has a `[]` method, which takes as parameter an integer OR a string
+Each object has a `[]` instance method, which takes as parameter an integer OR a string
 representation of the corresponding base and returns this integer expressed
 in base 10 :
 
@@ -78,31 +79,29 @@ in base 10 :
 base2 = ToDecimal::Base2
 base2[10] # => 2
 
-base8 = ToDecimal::Base8
-base8[12] # => 10
+b8 = ToDecimal::Base8
+b8[12] # => 10
 
-base8['12'] # => 10
-base8['012'] # => 10
+b8['12'] # => 10
+b8['012'] # => 10
 ```
 
-These objects and associate `[]` method are basically wrappers for the
+These objects and their associated `[]` method are basically wrappers for the
 `Integer.to_s.to_i(original_base)` or `String.to_i(original_base)` methods,
 with a custom error when the input is not of the excpected base, or not a valid
 string representation of an integer. In this case, you will get
-a `WrongBaseInputError` if the integer or string argument is not of
-the given base, instead of the default results of the previous methods, which
-can lead to unexpected results if drown into some other computations.
+a `WrongBaseInputError` instead of the default results of the previous methods, which can lead to unexpected results if drown into some other computations.
 
 The objects are frozen and no new `Convertor` object can be instantiated.
 
 The benefit you may find using this gem are:
 
-- argument validation : you avoid the standard behavior of the different built-in
+- **argument validation** : you avoid the standard behavior of the different built-in
 methods, which sometimes throw an error (`Kernel#Integer(arg, base)`) or worse,
 silently stop the conversion process when they encounter an invalid character, returning the result of the conversion so far. Instead, you have a consistent
 behavior, and you are free to decide what to do with the error.
 
-- allow you to work with strings with leading zeros : in this case, zeros are removed form the beginning of the string, avoiding the implict conversion in
+- **allow you to work with strings with leading zeros** : in this case, zeros are removed form the beginning of the string, avoiding the implict conversion in
 base 8, which is, most of the time, not what you want ;
 
 
