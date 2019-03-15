@@ -1,3 +1,7 @@
+require 'bundler'
+require 'bundler/setup'
+Bundler.require(:default, :development)
+
 require_relative 'to_decimal/validator_class'
 require_relative 'to_decimal/convertor_class'
 require_relative 'to_decimal/wrong_base_input_error'

@@ -2,8 +2,8 @@ require 'rake'
 
 Gem::Specification.new do |s|
   s.name        = 'to_decimal'
-  s.version     = '1.0.0'
-  s.date        = '2018-11-28'
+  s.version     = '1.0.1'
+  s.date        = '2019-03-16'
   s.summary     = "A simple integer converter from bases 2..10 to decimal integers"
   s.description = <<~EOF
                   Provides a simple way to convert an integer expressed in bases
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
     'https://github.com/loranger32/to_decimal'
   s.license     = 'MIT'
 
-  s.required_ruby_version = '>= 2.4.1'
+  s.required_ruby_version = '>= 2.4.5'
 
   s.metadata = {
     "source_code_uri" => "https://github.com/loranger32/to_decimal",
@@ -24,8 +24,10 @@ Gem::Specification.new do |s|
   }
 
 
-  s.add_development_dependency 'bundler', '~> 1.16'
+  s.add_development_dependency 'bundler', '~> 2.0.1'
   s.add_development_dependency 'rake', '~> 12.3'
   s.add_development_dependency 'minitest', '~> 5.11'
   s.add_development_dependency 'minitest-reporters', '~> 1.1'
+  s.add_development_dependency 'pry', '~> 0.12.2'
+  s.add_development_dependency 'rubocop', '~> 0.65.0'
 end

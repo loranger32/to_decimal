@@ -4,17 +4,9 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 require_relative '../lib/to_decimal'
 
-# ========== Test helper method ================================================
-
-def execute_test_with(test_values, base_convertor)
-  test_values.each do |data_set|
-    assert_equal data_set[1], base_convertor[data_set[0]] 
-  end
-end
-
 class ToDecimalBaseValidationTest < Minitest::Test
 
-# ======== Testing error is raises if input is not of the correct base =========
+# ======== Testing error is raised if input is not of the correct base =========
   
   def test_raises_error_if_input_is_not_from_base_2
     base2 = ToDecimal::Base2
@@ -64,7 +56,17 @@ class ToDecimalBaseValidationTest < Minitest::Test
   end
 end
 
-# ========= Testing return values of [] instance method ========================
+# ========= Testing return values of [] method =================================
+
+# ========= Test helper method
+
+def execute_test_with(test_values, base_convertor)
+  test_values.each do |data_set|
+    assert_equal data_set[1], base_convertor[data_set[0]] 
+  end
+end
+
+# ========= Test class
 
 class ToDecimalConvserionFromIntegerTest < Minitest::Test
 
