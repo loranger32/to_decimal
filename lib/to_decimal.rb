@@ -17,6 +17,7 @@ module ToDecimal
   Base9 = Convertor.new(9)
   Base10 = Convertor.new(10)
 
+  # Ensure no other convertor object will be created
   class Convertor
     class << self
       private :new

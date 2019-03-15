@@ -6,8 +6,8 @@ require_relative '../lib/to_decimal'
 
 class ToDecimalBaseValidationTest < Minitest::Test
 
-# ======== Testing error is raised if input is not of the correct base =========
-  
+  # ======== Testing error is raised if input is not of the correct base =======
+
   def test_raises_error_if_input_is_not_from_base_2
     base2 = ToDecimal::Base2
     assert_raises(ToDecimal::WrongBaseInputError) { base2[2] }
@@ -62,7 +62,7 @@ end
 
 def execute_test_with(test_values, base_convertor)
   test_values.each do |data_set|
-    assert_equal data_set[1], base_convertor[data_set[0]] 
+    assert_equal data_set[1], base_convertor[data_set[0]]
   end
 end
 
@@ -71,15 +71,15 @@ end
 class ToDecimalConvserionFromIntegerTest < Minitest::Test
 
   # Test data
-  TEST_VALUES_BASE_2 = [[101, 5], [100_000_000, 256]]
-  TEST_VALUES_BASE_3 = [[1122111, 1201], [12, 5]]
-  TEST_VALUES_BASE_4 = [[11001, 321], [322, 58]]
-  TEST_VALUES_BASE_5 = [[14, 9], [10011302, 78952]]
-  TEST_VALUES_BASE_6 = [[13, 9], [1405304, 78952]]
-  TEST_VALUES_BASE_7 = [[12, 9], [446116, 78952]]
-  TEST_VALUES_BASE_8 = [[11, 9], [232150, 78952]]
-  TEST_VALUES_BASE_9 = [[10, 9], [130264, 78952]]
-  TEST_VALUES_BASE_10 = [[9, 9], [78952, 78952]]
+  TEST_VALUES_BASE_2 = [[101, 5], [100_000_000, 256]].freeze
+  TEST_VALUES_BASE_3 = [[1_122_111, 1201], [12, 5]].freeze
+  TEST_VALUES_BASE_4 = [[11_001, 321], [322, 58]].freeze
+  TEST_VALUES_BASE_5 = [[14, 9], [10_011_302, 78_952]].freeze
+  TEST_VALUES_BASE_6 = [[13, 9], [1_405_304, 78_952]].freeze
+  TEST_VALUES_BASE_7 = [[12, 9], [446_116, 78_952]].freeze
+  TEST_VALUES_BASE_8 = [[11, 9], [232_150, 78_952]].freeze
+  TEST_VALUES_BASE_9 = [[10, 9], [130_264, 78_952]].freeze
+  TEST_VALUES_BASE_10 = [[9, 9], [78_952, 78_952]].freeze
 
   def test_returns_decimal_value_of_integer_of_base_2
     execute_test_with(TEST_VALUES_BASE_2, ToDecimal::Base2)
@@ -119,15 +119,15 @@ class ToDecimalConvserionFromIntegerTest < Minitest::Test
 end
 
 class ToDecimalConvserionFromStringTest < Minitest::Test
-  TEST_VALUES_BASE_2 = [['101', 5], ['100000000', 256]]
-  TEST_VALUES_BASE_3 = [['1122111', 1201], ['12', 5]]
-  TEST_VALUES_BASE_4 = [['11001', 321], ['322', 58]]
-  TEST_VALUES_BASE_5 = [['14', 9], ['10011302', 78952]]
-  TEST_VALUES_BASE_6 = [['13', 9], ['1405304', 78952]]
-  TEST_VALUES_BASE_7 = [['12', 9], ['446116', 78952]]
-  TEST_VALUES_BASE_8 = [['11', 9], ['232150', 78952]]
-  TEST_VALUES_BASE_9 = [['10', 9], ['130264', 78952]]
-  TEST_VALUES_BASE_10 = [['9', 9], ['78952', 78952]]
+  TEST_VALUES_BASE_2 = [['101', 5], ['100000000', 256]].freeze
+  TEST_VALUES_BASE_3 = [['1122111', 1_201], ['12', 5]].freeze
+  TEST_VALUES_BASE_4 = [['11001', 321], ['322', 58]].freeze
+  TEST_VALUES_BASE_5 = [['14', 9], ['10011302', 78_952]].freeze
+  TEST_VALUES_BASE_6 = [['13', 9], ['1405304', 78_952]].freeze
+  TEST_VALUES_BASE_7 = [['12', 9], ['446116', 78_952]].freeze
+  TEST_VALUES_BASE_8 = [['11', 9], ['232150', 78_952]].freeze
+  TEST_VALUES_BASE_9 = [['10', 9], ['130264', 78_952]].freeze
+  TEST_VALUES_BASE_10 = [['9', 9], ['78952', 78_952]].freeze
 
   def test_returns_decimal_value_of_string_of_base_2
     execute_test_with(TEST_VALUES_BASE_2, ToDecimal::Base2)
@@ -167,15 +167,15 @@ class ToDecimalConvserionFromStringTest < Minitest::Test
 end
 
 class RemoveLeadingZeroesFromStringsTest < Minitest::Test
-  TEST_VALUES_BASE_2 = [['00101', 5], ['0100000000', 256]]
-  TEST_VALUES_BASE_3 = [['001122111', 1201], ['012', 5]]
-  TEST_VALUES_BASE_4 = [['0011001', 321], ['322', 58]]
-  TEST_VALUES_BASE_5 = [['0014', 9], ['010011302', 78952]]
-  TEST_VALUES_BASE_6 = [['0013', 9], ['01405304', 78952]]
-  TEST_VALUES_BASE_7 = [['0012', 9], ['0446116', 78952]]
-  TEST_VALUES_BASE_8 = [['0011', 9], ['0232150', 78952]]
-  TEST_VALUES_BASE_9 = [['0010', 9], ['0130264', 78952]]
-  TEST_VALUES_BASE_10 = [['009', 9], ['078952', 78952]]
+  TEST_VALUES_BASE_2 = [['00101', 5], ['0100000000', 256]].freeze
+  TEST_VALUES_BASE_3 = [['001122111', 1_201], ['012', 5]].freeze
+  TEST_VALUES_BASE_4 = [['0011001', 321], ['322', 58]].freeze
+  TEST_VALUES_BASE_5 = [['0014', 9], ['010011302', 78_952]].freeze
+  TEST_VALUES_BASE_6 = [['0013', 9], ['01405304', 78_952]].freeze
+  TEST_VALUES_BASE_7 = [['0012', 9], ['0446116', 78_952]].freeze
+  TEST_VALUES_BASE_8 = [['0011', 9], ['0232150', 78_952]].freeze
+  TEST_VALUES_BASE_9 = [['0010', 9], ['0130264', 78_952]].freeze
+  TEST_VALUES_BASE_10 = [['009', 9], ['078952', 78_952]].freeze
 
   def test_removes_leading_zeros_from_string_with_base2
     execute_test_with(TEST_VALUES_BASE_2, ToDecimal::Base2)
