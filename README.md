@@ -66,12 +66,10 @@ This project is tested under minitest.
 
 # Usage
 
-### Instance methods
-
 The gem gives you access to 9 objects under the namespace `ToDecimal` called :
 `Base2`, `Base3`,... `Base10`.
 
-Each object has a `[]` instance method, which takes as parameter an integer OR a string
+Each object has a `[]` method, which takes as parameter an integer OR a string
 representation of the corresponding base and returns this integer expressed
 in base 10 :
 
