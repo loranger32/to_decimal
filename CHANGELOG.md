@@ -1,7 +1,22 @@
-# to_decimal 0.0.3 (2018-11-27)
+# to_decimal 1.0.1 (2019-03-16)
 ---
 
-**Breaking changes !!!** 
+- update required ruby version to 2.4.5 due to security fix
+- update the required versions of:
+  - bundler (2.0.1)
+  - rake (12.3.2)
+- add development dependecies:
+  - rubocop (0.65.0)
+  - pry (0.12.2)
+  - minitest (5.11)
+  - minitest-reporters (1.3.6)
+- Fix some style issues in the code
+# to_decimal 1.0.0 (2018-11-27)
+---
+
+# to_decimal 1.0.0 (2018-11-27)
+---
+**Breaking changes !** 
 
 - Provides a namespace `ToDecimal` to the gem
 - Renames the main class from `ToDecimal` to `Convertor`
