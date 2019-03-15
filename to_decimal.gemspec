@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
     'changelog_uri'   => 'https://github.com/loranger32/blob/master/CHANGELOG.md'
   }
 
-  s.add_development_dependency 'bundler', '~> 2.0.1'
+  s.add_development_dependency 'bundler', '~> 2.0', '>= 2.0.1'
   s.add_development_dependency 'rake', '~> 12.3'
   s.add_development_dependency 'minitest', '~> 5.11'
   s.add_development_dependency 'minitest-reporters', '~> 1.1'

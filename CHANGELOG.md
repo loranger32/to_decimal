@@ -3,7 +3,6 @@
 
 - update required ruby version to 2.4.5 due to security fix
 - update the required versions of:
-  - bundler (2.0.1)
   - rake (12.3.2)
 - add development dependencies:
   - rubocop (0.65.0)
