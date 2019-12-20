@@ -1,4 +1,4 @@
-# to_decimal
+# to_decimal (Version 1.0.2)
 
 A simple gem to convert an integer expressed in bases
 ranging from 2 to 10 into a decimal integer.
@@ -55,6 +55,17 @@ expressed in base 10. So I decided to write my own gem.
 # Installation
 ```shell
 $ gem install to_decimal
+```
+
+Or add this line to your Gemfile
+
+```ruby
+gem 'to_decimal'
+```
+
+and run
+
+```shell
 $ bundle install
 ```
 
