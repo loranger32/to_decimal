@@ -1,7 +1,7 @@
 # to_decimal (Version 1.0.2)
 
 A simple gem to convert an integer expressed in bases
-ranging from 2 to 10 into a decimal integer.
+ranging from 2 to 36 into a decimal integer.
 
 Ruby comes with useful built-in methods to convert integers and string
 representations of integers to another base ([`String#to_i(base=10)`](http://ruby-doc.org/core-2.5.3/String.html#method-i-to_i),
@@ -49,8 +49,8 @@ They are very comprehensive, go both behind the base 36, which is the limit
 of Ruby, and allow to convert form bases back and forth.
 
 But they were a little too heavy for my purpose, which was simply
-converting from a base lesser or equal than 10 and to return an integer
-expressed in base 10. So I decided to write my own gem.
+converting from a base up to 36 and to return an integer
+expressed in base 10, so I wrote a simple wrapper.
 
 # Installation
 ```shell
@@ -77,31 +77,34 @@ This project is tested under minitest.
 
 # Usage
 
-The gem gives you access to 9 objects under the namespace `ToDecimal` called :
-`Base2`, `Base3`,... `Base10`.
+You can create a `ToDecimal::Base` object with the required base as an integer argument :
+
+```ruby
+b8 = ToDecimal::Base.new(8)
+```
 
 Each object has a `[]` method, which takes as parameter an integer OR a string
-representation of the corresponding base and returns this integer expressed
+representation of an integer of the corresponding base and returns this integer expressed
 in base 10 :
 
 ```ruby
-base2 = ToDecimal::Base2
+base2 = ToDecimal::Base.new(2)
 base2[10] # => 2
 
-b8 = ToDecimal::Base8
+b8 = ToDecimal::Base.new(8)
 b8[12] # => 10
 
 b8['12'] # => 10
 b8['012'] # => 10
+b8["99"] # raises ToDecimal::WrongBaseInputError
+b8["123abc"] # raises ArgumentError
 ```
 
 These objects and their associated `[]` method are basically wrappers for the
 `Integer.to_s.to_i(original_base)` or `String.to_i(original_base)` methods,
-with a custom error when the input is not of the excpected base, or not a valid
-string representation of an integer. In this case, you will get
-a `WrongBaseInputError` instead of the default results of the previous methods, which can lead to unexpected results if drown into some other computations.
+with an `ArgumentError` being raised if the argument is not a valid string representation of an integer, and a custom `WrongBaseInputError` error when the input is not of the excpected base (sublcass of `ArgumentError`).
 
-The objects are frozen and no new `Convertor` object can be instantiated.
+The objects are frozen.
 
 The benefit you may find using this gem are:
 
@@ -113,7 +116,8 @@ behavior, and you are free to decide what to do with the error.
 - **allow you to work with strings with leading zeros** : in this case, zeros are removed form the beginning of the string, avoiding the implict conversion in
 base 8, which is, most of the time, not what you want ;
 
-
+For the moment, the gem gives you access to 9 objects under the namespace `ToDecimal` called :
+`Base2`, `Base3`,... `Base10` (will be deprecated).
 # Contribute
 
 Think it could be better ? Great !

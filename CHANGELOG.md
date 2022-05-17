@@ -1,7 +1,9 @@
 # master
 ---
 
-- update Gemfile and se standard instead of rubocop
+- Change Convertor class name to Base and allow instantiation of new objects
+- Allow usage of bases up to 36
+- update Gemfile and use standard instead of rubocop
 
 # to_decimal 1.0.2 (2019-12-20)
 ---
