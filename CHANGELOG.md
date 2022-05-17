@@ -1,3 +1,8 @@
+# master
+---
+
+- update Gemfile and se standard instead of rubocop
+
 # to_decimal 1.0.2 (2019-12-20)
 ---
 - fix a bug by removing the require statements at the top of `lib/to_decimal.rb`
