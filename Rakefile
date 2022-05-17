@@ -1,4 +1,5 @@
 require 'rake/testtask'
+require "standard/rake"
 require 'find'
 
 desc 'Run tests'
@@ -17,9 +18,4 @@ task :inventory do
     next if name.include?('/.') # Excludes files and directories with . names
     puts name if File.file?(name)
   end
-end
-
-desc 'Run rubocop'
-task :rub do
-  sh 'rubocop'
 end

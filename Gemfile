@@ -2,14 +2,9 @@ source 'https://rubygems.org'
 
 ruby '>= 2.4'
 
-source 'https://rubygems.org'
-
-gem 'bundler', '~> 2.0', '>= 2.0.1'
-gem 'rake', '~> 12.3', '>= 12.3.2'
-
-group :development do
-  gem 'minitest', '~> 5.11', '>= 5.11.3'
-  gem 'minitest-reporters', '~> 1.3', '>= 1.3.6'
-  gem 'pry', '~> 0.12.2'
-  gem 'rubocop', '~> 0.65.0'
-end
+gem 'bundler', '~> 2.3', '>= 2.3.13'
+gem 'minitest', '~> 5.15'
+gem 'minitest-reporters', '~> 1.5'
+gem 'pry-byebug', '~> 3.9'
+gem 'standard', '~> 1.12', '>= 1.12.1'
+gem 'rake', '~> 13.0', '>= 13.0.6'
