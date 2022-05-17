@@ -1,6 +1,6 @@
 module ToDecimal
   # The main class that performs the actual conversion
-  class Convertor
+  class Base
     attr_reader :base
 
     def initialize(base)
@@ -33,8 +33,8 @@ module ToDecimal
 
     def validate_base(base)
       raise ArgumentError, 'Base must be an Integer' unless base.is_a?(Integer)
-      raise ArgumentError, 'Base must be 1..10' unless \
-        base.positive? && base <= 10
+      raise ArgumentError, 'Base must be 2..36' unless \
+        (2..36) === base
     end
   end
 end

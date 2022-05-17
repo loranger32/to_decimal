@@ -12,6 +12,10 @@ class ToDecimalBaseValidationTest < Minitest::Test
     base2 = ToDecimal::Base2
     assert_raises(ToDecimal::WrongBaseInputError) { base2[2] }
     assert_raises(ToDecimal::WrongBaseInputError) { base2[9] }
+
+    base2 = ToDecimal::Base.new(2)
+    assert_raises(ToDecimal::WrongBaseInputError) { base2[2] }
+    assert_raises(ToDecimal::WrongBaseInputError) { base2[9] }
   end
 
   def test_raises_error_if_input_is_not_from_base_3
@@ -216,6 +220,6 @@ end
 
 class ConvertorCannotBeInstantiatedTest < Minitest::Test
   def test_raises_error_if_user_tries_to_instantiate_new_convertor
-    assert_raises(NoMethodError) { ToDecimal::Convertor.new }
+    assert_raises(NoMethodError) { ToDecimal::Base.new(5) }
   end
 end
