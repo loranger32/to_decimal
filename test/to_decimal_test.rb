@@ -217,9 +217,3 @@ class RemoveLeadingZeroesFromStringsTest < Minitest::Test
     execute_test_with(TEST_VALUES_BASE_10, ToDecimal::Base10)
   end
 end
-
-class ConvertorCannotBeInstantiatedTest < Minitest::Test
-  def test_raises_error_if_user_tries_to_instantiate_new_convertor
-    assert_raises(NoMethodError) { ToDecimal::Base.new(5) }
-  end
-end

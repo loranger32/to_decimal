@@ -12,11 +12,4 @@ module ToDecimal
   Base8 = Base.new(8)
   Base9 = Base.new(9)
   Base10 = Base.new(10)
-
-  # Ensure no other convertor object will be created
-  class Base
-    class << self
-      private :new
-    end
-  end
 end
