@@ -1,21 +1,21 @@
-require 'rake/testtask'
+require "rake/testtask"
 require "standard/rake"
-require 'find'
+require "find"
 
-desc 'Run tests'
+desc "Run tests"
 Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.test_files = FileList['test/**/*_test.rb']
+  t.libs << "lib"
+  t.libs << "test"
+  t.test_files = FileList["test/**/*_test.rb"]
 end
 
-desc 'Run tests'
-task :default => :test
+desc "Run tests"
+task default: :test
 
-desc 'Display inventory of all files'
+desc "Display inventory of all files"
 task :inventory do
-  Find.find('.') do |name|
-    next if name.include?('/.') # Excludes files and directories with . names
+  Find.find(".") do |name|
+    next if name.include?("/.") # Excludes files and directories with . names
     puts name if File.file?(name)
   end
 end

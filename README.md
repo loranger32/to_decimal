@@ -1,16 +1,15 @@
 # to_decimal (Version 1.0.2)
 
-A simple gem to convert an integer expressed in bases
+A simple gem to convert an integer or string representation of an integer expressed in bases
 ranging from 2 to 36 into a decimal integer.
 
-Ruby comes with useful built-in methods to convert integers and string
+Ruby comes with built-in methods to convert integers and string
 representations of integers to another base ([`String#to_i(base=10)`](http://ruby-doc.org/core-2.5.3/String.html#method-i-to_i),
 [`Kernel#Integer(arg, base=0)`](https://ruby-doc.com/core-2.5.2/Kernel.html#method-i-Integer) and 
 [`Integer#to_s(base=10)`](http://ruby-doc.org/core-2.5.3/Integer.html#method-i-to_s).
 
 You can also use prefixes with [litteral numeric constant](https://ruby-doc.com/core-2.5.2/doc/syntax/literals_rdoc.html#label-Numbers),
-but it only works for binary, octal, decimal and hexadecimal notation (which cover
-the most usecases):
+for binary, octal, decimal and hexadecimal notation :
 
 ```ruby
 # binary
@@ -26,31 +25,39 @@ the most usecases):
 0x17 # => 23
 ```
 
-But if you want to convert an integer of say, base 6, to an integer of base 10,
-you need to proceed like this (AFAIK):
+For other bases ranging from 2 to 36, you can proceed like this :
 
 ```ruby
 12.to_s.to_i(6) # => 8
+# OR
+Integer("12", 6)  # => 8)
 ```
 
-It's not a concern if you need to do this occasionally, or if you can easily
-manage using prefixes, but I thought there could be a more straightforward,
-consise and explicit way to perform this, showing more clearly what your intent
-is.
+The `Kernel#Integer` method raises useful error messages when using invalid arguments.
 
-I've looked in the core API and in the Standard Library, but I didn't find
-anything. 
+```
+Integer "17", 6 # => `Integer': invalid value for Integer(): "17" (ArgumentError)
 
-I found the following two gems :
+Integer "17, 37 # => `Integer': invalid radix 37 (ArgumentError)
+```
+
+The `String#to_i` method on the other hand also raises an ArgumentError when trying to use an invalid radix, _but_ if the string value does not represent a valid integer, or an integer that doesn't match the provided base, the method silently stop the conversion process when it encounters an invalid character, and returns the result of the conversion so far :
+
+```
+"17".to_i(37) # => invalid radix 37 (ArgumentError)
+"17".to_i(6) # => 1
+"12378".to_i(6) # => 51
+```
+
+This gem is simply a wrapper around the `String#to_i` and `Kernel#Integer` methods, with some argument validations and useful error messages.
+
+If you need more features, checkout these twp gems :
 - [bases](https://github.com/whatyouhide/bases) ;
 - [radix](https://github.com/rubyworks/radix) ;
 
 They are very comprehensive, go both behind the base 36, which is the limit
 of Ruby, and allow to convert form bases back and forth.
 
-But they were a little too heavy for my purpose, which was simply
-converting from a base up to 36 and to return an integer
-expressed in base 10, so I wrote a simple wrapper.
 
 # Installation
 ```shell
@@ -83,41 +90,30 @@ You can create a `ToDecimal::Base` object with the required base as an integer a
 b8 = ToDecimal::Base.new(8)
 ```
 
-Each object has a `[]` method, which takes as parameter an integer OR a string
+Each object is frozen after initialisation and exposes a `[]` method, which takes as argument an integer OR a string
 representation of an integer of the corresponding base and returns this integer expressed
 in base 10 :
 
 ```ruby
 base2 = ToDecimal::Base.new(2)
 base2[10] # => 2
+base2["10"] # => 2
+base2["010"] # => 2
 
 b8 = ToDecimal::Base.new(8)
 b8[12] # => 10
-
 b8['12'] # => 10
 b8['012'] # => 10
-b8["99"] # raises ToDecimal::WrongBaseInputError
-b8["123abc"] # raises ArgumentError
+
+b8["99"]
+# => raises : A number of base 8 cannot have a  digit greater or equal to '7'. Check your argument: '99'. (ToDecimal::WrongInputBaseError)
+
+b36 = ToDecimal::Base.new(36)
+b36[12] # => 38
+b36["ruby"] # => 1299022
+
 ```
 
-These objects and their associated `[]` method are basically wrappers for the
-`Integer.to_s.to_i(original_base)` or `String.to_i(original_base)` methods,
-with an `ArgumentError` being raised if the argument is not a valid string representation of an integer, and a custom `WrongBaseInputError` error when the input is not of the excpected base (sublcass of `ArgumentError`).
-
-The objects are frozen.
-
-The benefit you may find using this gem are:
-
-- **argument validation** : you avoid the standard behavior of the different built-in
-methods, which sometimes throw an error (`Kernel#Integer(arg, base)`) or worse,
-silently stop the conversion process when they encounter an invalid character, returning the result of the conversion so far. Instead, you have a consistent
-behavior, and you are free to decide what to do with the error.
-
-- **allow you to work with strings with leading zeros** : in this case, zeros are removed form the beginning of the string, avoiding the implict conversion in
-base 8, which is, most of the time, not what you want ;
-
-For the moment, the gem gives you access to 9 objects under the namespace `ToDecimal` called :
-`Base2`, `Base3`,... `Base10` (will be deprecated).
 # Contribute
 
 Think it could be better ? Great !
@@ -137,5 +133,4 @@ Laurent Guinotte
 
 # Licence
 
-to_decimal is released under the MIT Licence. See LICENCE.txt
-for further details.
+MIT

@@ -1,9 +1,17 @@
-# master
+# to_decimal 2.0.0 (2022-10-02)
 ---
-
-- Change Convertor class name to Base and allow instantiation of new objects
+New Features :
+- Allow instantiation of new base objects
 - Allow usage of bases up to 36
-- update Gemfile and use standard instead of rubocop
+
+Breaking Changes :
+
+- `WrongBaseInputError` is renamed `WrongInputBaseError`
+- The `Base2`, `Base3`, ... `Base10` constants are no longer provided, you need to instantiate Base object yourself
+
+Other :
+- Change Convertor class name to Base
+- Update development dependecies and use Standard instead of Rubocop for linting
 
 # to_decimal 1.0.2 (2019-12-20)
 ---
