@@ -1,4 +1,4 @@
-# to_decimal (Version 1.0.2)
+# to_decimal (Version 2.0.0)
 
 A simple gem to convert an integer or string representation of an integer expressed in bases
 ranging from 2 to 36 into a decimal integer.
